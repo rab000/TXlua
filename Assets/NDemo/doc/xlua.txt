@@ -5,7 +5,11 @@ line
 基于xlua和mvvm的unity框架 ,xuui,混合了xlua和mvvm,比较重要
 https://www.imooc.com/article/281869
 
+//mvc构架，有点粗糙，能提供一些思路
 https://blog.csdn.net/weixin_38082526/article/details/80784075
+
+//一些注意事项
+https://www.e-learn.cn/content/qita/788501
 
 https://article.itxueyuan.com/ak7y0n
 
