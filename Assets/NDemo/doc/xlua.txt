@@ -2,13 +2,15 @@ line
 1 首先应实现基本lua处理ui
 2 然后考虑实现热补丁
 
-基于xlua和mvvm的unity框架 ,xuui,混合了xlua和mvvm
+基于xlua和mvvm的unity框架 ,xuui,混合了xlua和mvvm,比较重要
 https://www.imooc.com/article/281869
 
+https://blog.csdn.net/weixin_38082526/article/details/80784075
 
+https://article.itxueyuan.com/ak7y0n
 
-
-
+https://blog.csdn.net/liaoshengg/article/details/81562633
+https://blog.csdn.net/wangjiangrong/article/details/79818225
 基本思路
 1 本地测试，从一个路径直接读lua，然后加载
 2 本地测试，从一个路径读取lua，然后替换c#
