@@ -1,0 +1,34 @@
+line
+1 首先应实现基本lua处理ui
+2 然后考虑实现热补丁
+
+基于xlua和mvvm的unity框架 ,xuui,混合了xlua和mvvm
+https://www.imooc.com/article/281869
+
+
+
+
+
+基本思路
+1 本地测试，从一个路径直接读lua，然后加载
+2 本地测试，从一个路径读取lua，然后替换c#
+3 远程测试，从远程路径下载lua并保存到沙盒，然后加载
+4 远程测试，从远程路径下载lua并保存到沙盒，然后替换c#功能
+
+xlua热更基本流程
+https://blog.csdn.net/liaoshengg/article/details/81562633
+
+xlua替换c#教程
+https://blog.csdn.net/wangjiangrong/article/details/79818225
+
+一些具体细节
+https://blog.csdn.net/ChinarCSDN/article/details/81124973
+
+简单过demo
+
+关于映射各自类型的疑问，涉及到lua语法
+
+https://blog.csdn.net/VRunSoftYanlz/article/details/81141502
+
+问题
+lua怎么替代绑定在go上的脚本，ui一般需要一些绑定在go上的脚本
