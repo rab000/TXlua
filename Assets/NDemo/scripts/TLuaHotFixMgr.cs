@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using NXLua;
 using System.IO;
+/// <summary>
+/// 热修复
+/// </summary>
 public class TLuaHotFixMgr : MonoBehaviour {
 
 	void Awake(){
-		TLuaMgr.Ins._LuaEnv.AddLoader (MyLoader);   
-		//NTODO 这里貌似需要载入所有需要热更的lua
-		TLuaMgr.Ins._LuaEnv.DoString ("require 'hot'");
+		TLuaMgr._LuaEnv.AddLoader (MyLoader);   
+		//NTODO 这里貌似需要载入所有需要热更的lua,
+
+		TLuaMgr._LuaEnv.DoString ("require 'hot'");
 	}
 
 	public byte[] MyLoader(ref string filepath) {

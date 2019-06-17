@@ -101,5 +101,28 @@ namespace NXLua
             scriptEnv.Dispose();
             injections = null;
         }
+
+
+		#region 
+
+		//nafio info 这个方法用来替换本类中TextAsset，改为动态加载的方式
+//		public void TT(){
+//			AssetBundle ab = AssetBundle.LoadFromFile("bundlePath");  
+//			TextAsset textAsset = ab.LoadAsset<TextAsset>("name");  
+//			if (textAsset == null)  
+//			{  
+//				LogSystem.DebugLog("decrypt. {0}包没这个文件: {1}", BundleManager.luaAbName, BundleManager.luaAbPath.ToLower());  
+//				return null;  
+//			}  
+//			ab.Unload(false);  
+//			byte[] data = textAsset.bytes;  
+//			data = Util.Decrypt(data);  
+//			LuaBehaviour.mCacheAb = AssetBundle.LoadFromMemory(data);  
+//		}
+
+		#endregion
+
     }
+
+
 }
