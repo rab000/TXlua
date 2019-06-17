@@ -30,6 +30,13 @@ namespace NXLua {
             string absPath = @"E:appunity2018productsFishXlua" + filePath + ".lua.txt";
             return System.Text.Encoding.UTF8.GetBytes(File.ReadAllText(absPath));
         }
+
+		//加载Application.dataPath根目录下的某个lua
+		public void LoadLua(string relePath)
+		{
+			_LuaEnv.DoString (string.Format ("require '{0}'", Application.dataPath + relePath));
+		}
+
     }
 }
 
