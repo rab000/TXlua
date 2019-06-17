@@ -20,8 +20,8 @@ xxxx 问题，怎么动态替换脚本，动态决定使用c#还是lua
 官网教程
 https://github.com/Tencent/xLua
 
-xlua教程，基本跟官网差不多，基本是对官网的翻译
-https://blog.csdn.net/VRunSoftYanlz/article/details/81141502
+xlua替换c#教程，基本流程是从main.lua开始，可参考，流程过于简单
+https://blog.csdn.net/wangjiangrong/article/details/79818225
 
 xlua入门还可以系列，可以解决lua挂go上的问题，有关键点，但不够细致
 ?提到了动态挂载luaMono时与Awake的关系问题，这个回看下
@@ -30,15 +30,17 @@ https://www.e-learn.cn/content/qita/788501
 涉及到自动打[Hotfix]标签等功能，这个留意下
 
 
+xlua教程，基本跟官网差不多，基本是对官网的翻译
+https://blog.csdn.net/VRunSoftYanlz/article/details/81141502
+
+冗长的注意点
+https://blog.csdn.net/ChinarCSDN/article/details/81124973
 
 热修复热更流程
-https://blog.csdn.net/hany3000/article/details/82942160
-
-xlua热更基本流程
 https://blog.csdn.net/liaoshengg/article/details/81562633
 
-xlua替换c#教程
-https://blog.csdn.net/wangjiangrong/article/details/79818225
+
+
 
 基于xlua和mvvm的unity框架 ,xuui,混合了xlua和mvvm,比较重要
 https://www.imooc.com/article/281869
@@ -55,12 +57,8 @@ https://blog.csdn.net/u013824131/article/details/54346888
 
 
 
-一些具体细节
-https://blog.csdn.net/ChinarCSDN/article/details/81124973
-
 //一些注意事项
 https://article.itxueyuan.com/ak7y0n
-https://blog.csdn.net/wangjiangrong/article/details/79818225
 
 xlua泰克视频
 https://www.taikr.com/course/497

@@ -1,0 +1,13 @@
+print("main.lua start")
+
+--º”‘ÿlua
+local luaList = require("lua_list");
+for _,filename in ipairs(luaList) do
+	require(filename);
+end 
+
+--º”‘ÿ»»–ﬁ∏¥
+local hotfixList = require("hotfix_list");
+for _,filename in ipairs(hotfixList) do
+	require(filename);
+end 

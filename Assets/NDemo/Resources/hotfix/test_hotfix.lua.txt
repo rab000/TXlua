@@ -1,0 +1,7 @@
+print("test_hotfix start");
+ 
+--xlua.private_accessible(CS.MyExamples.Hotfix);  
+ 
+--xlua.hotfix(CS.MyExamples.Hotfix, "Show", function(self)  
+--    print("lua---Show");
+--end)
