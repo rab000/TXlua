@@ -24,7 +24,9 @@ namespace NXLua
     [LuaCallCSharp]
     public class LuaBehaviour : MonoBehaviour
     {
-        public TextAsset luaScript;
+        //public TextAsset luaScript;
+        //lua文件沙盒中相对位置,自定义loader再TLuaMgr中就已经设置好了，这类直接传入相对路径
+        public string LuaRelePath;
         public Injection[] injections;
 
         //internal static LuaEnv luaEnv = new LuaEnv(); //all lua behaviour shared one luaenv only!
@@ -52,8 +54,8 @@ namespace NXLua
             {
                 scriptEnv.Set(injection.name, injection.value);
             }
-
-            TLuaMgr._LuaEnv.DoString(luaScript.text, "LuaBehaviour", scriptEnv);
+              
+            TLuaMgr._LuaEnv.DoString(string.Format("require '{0}'",LuaRelePath)/*luaScript.text*/, "LuaBehaviour", scriptEnv);
 
             Action luaAwake = scriptEnv.Get<Action>("awake");
             scriptEnv.Get("start", out luaStart);

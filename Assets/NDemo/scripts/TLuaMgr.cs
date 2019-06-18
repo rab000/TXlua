@@ -26,16 +26,25 @@ namespace NXLua {
 		public void TStart()
 		{
 			_LuaEnv.AddLoader(MyLoader);
-			_LuaEnv.DoString("require 'main'");
+			_LuaEnv.DoString("require 'test/main'");
 		}
 
         private byte[] MyLoader(ref string filePath)
         {
 			string path = Application.persistentDataPath + "/" + filePath + ".lua.txt";
-			string str = File.ReadAllText (path);
+            //Debug.LogError("---------->path:"+path);
+            //path:C:/Users/1/AppData/LocalLow/DefaultCompany/TXlua/main.lua.txt
+    
+            string str = File.ReadAllText (path);
 			return System.Text.Encoding.UTF8.GetBytes (str);
         }
 
+        public void Dispose()
+        {
+            _LuaEnv.Dispose();
+
+            GameObject.Destroy(gameObject);
+        }
     }
 
 }
