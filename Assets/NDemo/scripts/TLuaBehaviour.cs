@@ -54,8 +54,10 @@ namespace NXLua
             {
                 scriptEnv.Set(injection.name, injection.value);
             }
-              
+
+            //?虽然require只能加载一次，但是这个后面的scriptEnv环境怎么保证每次能对应上
             TLuaMgr._LuaEnv.DoString(string.Format("require '{0}'",LuaRelePath)/*luaScript.text*/, "LuaBehaviour", scriptEnv);
+
 
             Action luaAwake = scriptEnv.Get<Action>("awake");
             scriptEnv.Get("start", out luaStart);

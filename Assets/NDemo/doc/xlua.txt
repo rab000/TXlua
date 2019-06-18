@@ -14,9 +14,10 @@
 xxxx lua怎么替代绑定在go上的脚本，ui一般需要一些绑定在go上的脚本
 xxxx 问题，怎么动态替换脚本，动态决定使用c#还是lua
 ？有处矛盾，黑盒中的lua到底是设置好loader，由required加载还是由bundle的方式加载，猜测loader就可以搞定，一会测试下
-loader方式有局限，只能搜索某一级别路径，比如沙盒跟路径，否则就要配置一堆loader
+xxxx？ 没局限可以用相对路径 loader方式有局限，只能搜索某一级别路径，比如沙盒跟路径，否则就要配置一堆loader
 
-？如何避免uiLuaMono的luaString被多次载入，怎么做缓存
+？如何避免uiLuaMono的luaString被多次载入，怎么做缓存，requrie可以避免多次加载同一lua，那么问题是怎么
+动态替换luaMono中的环境，环境本身存的是每次打开的win自身的实例
 
 required会重复加载，避免重复加载的方法如下
 package.loaded[‘test.lua’] = nil

@@ -21,13 +21,16 @@ namespace NXLua {
         {
             Ins = this;
 			DontDestroyOnLoad (gameObject);
+            TStart();
         }
 
 		public void TStart()
 		{
 			_LuaEnv.AddLoader(MyLoader);
-			_LuaEnv.DoString("require 'test/main'");
-		}
+            //注意这里可以写相对路径，一旦自己设置了自定义的loader后，貌似Resource中的main就找不到
+            _LuaEnv.DoString("require 'test/main'");
+            
+        }
 
         private byte[] MyLoader(ref string filePath)
         {
