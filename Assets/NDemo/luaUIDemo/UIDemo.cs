@@ -35,7 +35,7 @@ public class UIDemo : MonoBehaviour {
             //这个方法的缺点是必须加到luaMono中，因为只有在这里才能拿到对应名称go的引用
             //luaMono中方法加多了就会很臃肿
 
-            //NTODO 下一步，想下，lua怎么动态替换ui，怎么加总入口
+            //NTODO 下一步，想下，lua怎么动态替换ui，怎么加总入口，ui名称不改，资源和代码改变
 
             //NTODO  ui里面的btn等go如何传递到lua中，还是在c#端封装好
 
