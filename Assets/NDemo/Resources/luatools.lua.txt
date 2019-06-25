@@ -1,11 +1,12 @@
+print("luatools.lua start");
 
 function AddLuaBehaviour(go, luaScriptName, dontDestroyOnLoad)
-    local behaviour = go:AddComponent(typeof(CS.LuaBehaviour))
-    behaviour.luaScriptName = luaScriptName
+    local behaviour = go:AddComponent(typeof(CS.NXLua.TLuaBehaviour))
+    behaviour.LuaRelePath = luaScriptName
     behaviour.dontDestroyOnLoad = dontDestroyOnLoad
     if go.activeSelf and go.activeInHierarchy then
         behaviour:Awake()
-        behaviour:OnEnable()
+        --behaviour:OnEnable()
     end
     return behaviour
 end

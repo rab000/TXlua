@@ -28,10 +28,14 @@ namespace NXLua {
 
 		public void TStart()
 		{
-			_LuaEnv.AddLoader(MyLoader);
+            //_LuaEnv.AddLoader(MyLoader);
             //注意这里可以写相对路径，一旦自己设置了自定义的loader后，貌似Resource中的main就找不到
-            _LuaEnv.DoString("require 'test/main'");
-            
+            //_LuaEnv.DoString("require 'test/main'");
+
+
+            //先从本地Resources中读，上面注掉的是从沙盒读
+            _LuaEnv.DoString("require 'main'");
+
         }
 
         private byte[] MyLoader(ref string filePath)

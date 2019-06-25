@@ -22,13 +22,13 @@ namespace NXLua
     }
 
     [LuaCallCSharp]
-    public class LuaBehaviour : MonoBehaviour
+    public class TLuaBehaviour : MonoBehaviour
     {
         //public TextAsset luaScript;
         //lua文件沙盒中相对位置,自定义loader再TLuaMgr中就已经设置好了，这类直接传入相对路径
         public string LuaRelePath;
         public Injection[] injections;
-
+        public bool dontDestroyOnLoad;
         //internal static LuaEnv luaEnv = new LuaEnv(); //all lua behaviour shared one luaenv only!
         internal static float lastGCTime = 0;
         internal const float GCInterval = 1;//1 second 
@@ -39,13 +39,17 @@ namespace NXLua
 
         private LuaTable scriptEnv;
 
-        void Awake()
+        public void Awake()
         {
+            Debug.LogError("Awake 已经加载到lua路径000");
 
             if (string.IsNullOrEmpty(LuaRelePath))
             {
+                Debug.LogError("lua相对路径为null");
                 return;
             }
+
+            Debug.LogError("Awake 已经加载到lua路径");
 
             scriptEnv = TLuaMgr._LuaEnv.NewTable();
 
@@ -56,9 +60,13 @@ namespace NXLua
             meta.Dispose();
 
             scriptEnv.Set("self", this);//因为这句，暂时不能将所有lua统一从main.lua入口调用，在每个luaMono中单独调用
-            foreach (var injection in injections)
+
+            if (null != injections)
             {
-                scriptEnv.Set(injection.name, injection.value);
+                foreach (var injection in injections)
+                {
+                    scriptEnv.Set(injection.name, injection.value);
+                }
             }
 
             TLuaMgr._LuaEnv.DoString(string.Format("require '{0}'",LuaRelePath)/*luaScript.text*/, "LuaBehaviour", scriptEnv);
@@ -99,10 +107,10 @@ namespace NXLua
             {
                 luaUpdate();
             }
-            if (Time.time - LuaBehaviour.lastGCTime > GCInterval)
+            if (Time.time - TLuaBehaviour.lastGCTime > GCInterval)
             {
                 TLuaMgr._LuaEnv.Tick();
-                LuaBehaviour.lastGCTime = Time.time;
+                TLuaBehaviour.lastGCTime = Time.time;
             }
         }
 
