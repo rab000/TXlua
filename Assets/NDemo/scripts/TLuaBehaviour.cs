@@ -49,13 +49,12 @@ namespace NXLua
             scriptEnv.SetMetaTable(meta);
             meta.Dispose();
 
-            scriptEnv.Set("self", this);
+            scriptEnv.Set("self", this);//因为这句，暂时不能将所有lua统一从main.lua入口调用，在每个luaMono中单独调用
             foreach (var injection in injections)
             {
                 scriptEnv.Set(injection.name, injection.value);
             }
 
-            //?虽然require只能加载一次，但是这个后面的scriptEnv环境怎么保证每次能对应上
             TLuaMgr._LuaEnv.DoString(string.Format("require '{0}'",LuaRelePath)/*luaScript.text*/, "LuaBehaviour", scriptEnv);
 
 
