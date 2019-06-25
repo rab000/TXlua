@@ -36,13 +36,9 @@ public class UIDemo : MonoBehaviour {
             //这个方法的缺点是必须加到luaMono中，因为只有在这里才能拿到对应名称go的引用
             //luaMono中方法加多了就会很臃肿
 
-           
-
-            //NTODO  ui里面的btn等go如何传递到lua中，还是在c#端封装好
 
             //NTODO 关于lua元表与环境
 
-            //NTODO 动态加载一个绑定了luaMono的prefab
 
             //下一步，具体lua ui mono类写法，
             //配置列表的写法
@@ -53,6 +49,7 @@ public class UIDemo : MonoBehaviour {
 
 	}
 
+    //通过一个窗口(prefab名称)就可以完成lua及对应prefab加载
     private void OpenUIWin(string winName)
     {
         //prefab上已经配置好了luaStr和要调用的go引用
