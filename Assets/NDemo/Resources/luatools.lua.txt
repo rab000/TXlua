@@ -1,0 +1,11 @@
+
+function AddLuaBehaviour(go, luaScriptName, dontDestroyOnLoad)
+    local behaviour = go:AddComponent(typeof(CS.LuaBehaviour))
+    behaviour.luaScriptName = luaScriptName
+    behaviour.dontDestroyOnLoad = dontDestroyOnLoad
+    if go.activeSelf and go.activeInHierarchy then
+        behaviour:Awake()
+        behaviour:OnEnable()
+    end
+    return behaviour
+end

@@ -41,6 +41,12 @@ namespace NXLua
 
         void Awake()
         {
+
+            if (string.IsNullOrEmpty(LuaRelePath))
+            {
+                return;
+            }
+
             scriptEnv = TLuaMgr._LuaEnv.NewTable();
 
             // 为每个脚本设置一个独立的环境，可一定程度上防止脚本间全局变量、函数冲突
@@ -72,6 +78,10 @@ namespace NXLua
         // Use this for initialization
         void Start()
         {
+            if (string.IsNullOrEmpty(LuaRelePath))
+            {
+                return;
+            }
             if (luaStart != null)
             {
                 luaStart();
@@ -81,6 +91,10 @@ namespace NXLua
         // Update is called once per frame
         void Update()
         {
+            if (string.IsNullOrEmpty(LuaRelePath))
+            {
+                return;
+            }
             if (luaUpdate != null)
             {
                 luaUpdate();
@@ -94,6 +108,10 @@ namespace NXLua
 
         void OnDestroy()
         {
+            if (string.IsNullOrEmpty(LuaRelePath))
+            {
+                return;
+            }
             if (luaOnDestroy != null)
             {
                 luaOnDestroy();

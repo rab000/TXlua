@@ -1,5 +1,7 @@
 print("main.lua start")
 
+local luatool = require("luatools");
+
 --加载lua，这里加载的是不绑定到ui上的lua，绑定到ui上的lua由luaMono加载，因为里面需要lua环境
 local luaList = require("lua_list");
 for _,filename in ipairs(luaList) do
