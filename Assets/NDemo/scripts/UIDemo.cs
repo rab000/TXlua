@@ -22,8 +22,8 @@ public class UIDemo : MonoBehaviour {
         {
             //动态添加一个go，动态绑定lua到这个go
             FDelegate f = TLuaMgr._LuaEnv.Global.Get<FDelegate>("AddLuaBehaviour");
-            GameObject go = new GameObject("tGo");
-            f(go,"tlua_ui_demo",false);
+            GameObject go = new GameObject("newGo");
+            f(go,"tmono_ui",false);
         }
 
 	}
