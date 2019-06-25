@@ -11,3 +11,4 @@ end
 function ondestroy()
     print("lua destroy")
 end
+
