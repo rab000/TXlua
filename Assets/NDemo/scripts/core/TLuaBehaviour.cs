@@ -27,6 +27,7 @@ namespace NXLua
         //public TextAsset luaScript;
         //lua文件沙盒中相对位置,自定义loader再TLuaMgr中就已经设置好了，这类直接传入相对路径
         public string LuaRelePath;
+        private bool BeLoadLuaStr = false;
         public Injection[] injections;
         public bool dontDestroyOnLoad;
         //internal static LuaEnv luaEnv = new LuaEnv(); //all lua behaviour shared one luaenv only!
@@ -41,15 +42,17 @@ namespace NXLua
 
         public void Awake()
         {
-            Debug.LogError("Awake 已经加载到lua路径000");
+            Debug.Log("TLuaBehaviour.Awake !");
 
             if (string.IsNullOrEmpty(LuaRelePath))
             {
-                Debug.LogError("lua相对路径为null");
+                BeLoadLuaStr = false;
+                Debug.Log("TLuaBehaviour.Awake LuaRelePath=null 不继续执行Awake");
                 return;
             }
 
-            Debug.LogError("Awake 已经加载到lua路径");
+            BeLoadLuaStr = true;
+            Debug.Log("TLuaBehaviour.Awake LuaRelePath!=null 继续执行Awake");
 
             scriptEnv = TLuaMgr._LuaEnv.NewTable();
 
@@ -71,7 +74,6 @@ namespace NXLua
 
             TLuaMgr._LuaEnv.DoString(string.Format("require '{0}'",LuaRelePath)/*luaScript.text*/, "LuaBehaviour", scriptEnv);
 
-
             Action luaAwake = scriptEnv.Get<Action>("awake");
             scriptEnv.Get("start", out luaStart);
             scriptEnv.Get("update", out luaUpdate);
@@ -84,12 +86,19 @@ namespace NXLua
         }
 
         // Use this for initialization
-        void Start()
+        public void Start()
         {
-            if (string.IsNullOrEmpty(LuaRelePath))
+
+            Debug.Log("TLuaBehaviour.Start !");
+
+            if (!BeLoadLuaStr)
             {
+                Debug.Log("TLuaBehaviour.Start LuaRelePath=null 不继续执行Start");
                 return;
             }
+
+            Debug.Log("TLuaBehaviour.Start LuaRelePath!=null 继续执行Start");
+
             if (luaStart != null)
             {
                 luaStart();
@@ -99,7 +108,7 @@ namespace NXLua
         // Update is called once per frame
         void Update()
         {
-            if (string.IsNullOrEmpty(LuaRelePath))
+            if (!BeLoadLuaStr)
             {
                 return;
             }
@@ -116,7 +125,7 @@ namespace NXLua
 
         void OnDestroy()
         {
-            if (string.IsNullOrEmpty(LuaRelePath))
+            if (!BeLoadLuaStr)
             {
                 return;
             }

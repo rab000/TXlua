@@ -1,1 +1,0 @@
-print("tlua_ui_demo.lua start")

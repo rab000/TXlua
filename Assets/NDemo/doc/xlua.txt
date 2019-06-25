@@ -30,6 +30,8 @@ https://github.com/Tencent/xLua
 
 待研究，简单mvc构架
 https://mp.weixin.qq.com/s/6SH1r-lWoJXS-3Ig6HsrSA
+待研究，可以找到一些细节
+https://blog.csdn.net/qq_42461824/article/details/84979608
 
 
 xlua替换c#教程，基本流程是从main.lua开始，可参考，流程过于简单

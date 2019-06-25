@@ -6,7 +6,7 @@ function AddLuaBehaviour(go, luaScriptName, dontDestroyOnLoad)
     behaviour.dontDestroyOnLoad = dontDestroyOnLoad
     if go.activeSelf and go.activeInHierarchy then
         behaviour:Awake()
-        --behaviour:OnEnable()
+        behaviour:Start()
     end
     return behaviour
 end
