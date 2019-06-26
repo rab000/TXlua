@@ -40,6 +40,11 @@ namespace NXLua
 
         private LuaTable scriptEnv;
 
+        string s = 
+            @"function start()" +
+            "print('injected object', btn1)" +
+            "end";
+
         public void Awake()
         {
             Debug.Log("TLuaBehaviour.Awake !");
@@ -55,10 +60,11 @@ namespace NXLua
             Debug.Log("TLuaBehaviour.Awake LuaRelePath!=null 继续执行Awake");
 
             scriptEnv = TLuaMgr._LuaEnv.NewTable();
-
+           
             // 为每个脚本设置一个独立的环境，可一定程度上防止脚本间全局变量、函数冲突
             LuaTable meta = TLuaMgr._LuaEnv.NewTable();
             meta.Set("__index", TLuaMgr._LuaEnv.Global);
+            
             scriptEnv.SetMetaTable(meta);
             meta.Dispose();
 
@@ -71,8 +77,11 @@ namespace NXLua
                     scriptEnv.Set(injection.name, injection.value);
                 }
             }
+            Debug.Log("TLuaBehaviour.Awake 设置self 各种go环境完毕");
 
-            TLuaMgr._LuaEnv.DoString(string.Format("require '{0}'",LuaRelePath)/*luaScript.text*/, "LuaBehaviour", scriptEnv);
+            //NTODO 下一步 ，require加载的时候，后面的scriptEnv没生效，要研究下怎么给一段lua设置环境
+            //_LuaEnv.DoString(string.Format("require '{0}'",LuaRelePath)/*luaScript.text*/, "TLuaBehaviour", scriptEnv);
+            TLuaMgr._LuaEnv.DoString(s/*luaScript.text*/, "TLuaBehaviour", scriptEnv);
 
             Action luaAwake = scriptEnv.Get<Action>("awake");
             scriptEnv.Get("start", out luaStart);

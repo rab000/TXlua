@@ -6,17 +6,19 @@ using XLua;
 public class UIDemo : MonoBehaviour {
 
 
+    [SerializeField] Transform CanvasTrm;
+
     [CSharpCallLua]
     public delegate int FDelegate(GameObject go, string luaScriptName, bool beDestroy);
 
-    void Start ()
+    void Awake()
     {
-		
-	}
-	
+        
+        CanvasTrm = GameObject.Find("Canvas").transform;
+    }
+
     //某时某刻窗口能动态处理么
-	
-	void Update ()
+    void Update()
     {
         if (Input.GetKeyUp(KeyCode.A))
         {
@@ -25,35 +27,20 @@ public class UIDemo : MonoBehaviour {
             //GameObject go = new GameObject("newGo");
             //f(go,"tmono_ui",false);
 
-
-            OpenUIWin("luaUIprefab");
-
-            //prefab,假设存在一个c#辅助类，lua怎么操作ui相关呢，lua尽量不操作c#
-            //问题关键在于 luaMono获取不到子节点上的go，除非从prefab绑定，然后按顺序读取
-            //最好是lua只操作click等返回，但不操作btn绑定
-
-            //可以考虑c#写个方法registBtnClick("goname",luafunc);//这个可以避免lua操作unity对象
-            //这个方法的缺点是必须加到luaMono中，因为只有在这里才能拿到对应名称go的引用
-            //luaMono中方法加多了就会很臃肿
-
-
-            //NTODO 关于lua元表与环境
-
-
-            //下一步，具体lua ui mono类写法，
-            //配置列表的写法
-            //hotfix
-            //后续逐步补充
+            OpenUIWin("test_ui_panel");
 
         }
 
-	}
+    }
 
     //通过一个窗口(prefab名称)就可以完成lua及对应prefab加载
     private void OpenUIWin(string winName)
     {
+        
         //prefab上已经配置好了luaStr和要调用的go引用
         var go = GameObject.Instantiate( Resources.Load(winName)) as GameObject;
+
+        go.transform.SetParent(CanvasTrm,false);
 
     }
 }
