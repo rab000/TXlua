@@ -33,6 +33,8 @@ https://mp.weixin.qq.com/s/6SH1r-lWoJXS-3Ig6HsrSA
 待研究，可以找到一些细节
 https://blog.csdn.net/qq_42461824/article/details/84979608
 
+lua requrie机制
+https://blog.csdn.net/zxm342698145/article/details/80607072
 
 xlua替换c#教程，基本流程是从main.lua开始，可参考，流程过于简单
 https://blog.csdn.net/wangjiangrong/article/details/79818225
