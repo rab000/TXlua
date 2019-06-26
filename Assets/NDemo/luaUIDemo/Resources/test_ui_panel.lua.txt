@@ -10,8 +10,8 @@ function start()
 
 	print("test_ui_panel.lua start...")
 
-	--selfRT = self:GetComponent("CS.UnityEngine.UI.RectTransform");
-	--print("selfrt x =====> '" ..selfRT.sizeDelta.x .."' ")
+	selfRT = self:GetComponent("RectTransform");
+	print("selfrt x =====> '" ..selfRT.sizeDelta.x .."' ")
 
 
 	print("lua start---------------");
@@ -22,10 +22,10 @@ function start()
 		print("btn1 clicked ")
 	end)
 
-	--button2= btn2:GetComponent("Button")
-	--button2.onClick:AddListener(function()
-	--	print("btn2 clicked ")
-	--end)
+	button2= btn2:GetComponent("Button")
+	button2.onClick:AddListener(function()
+		print("btn2 clicked ")
+	end)
 
 end
 

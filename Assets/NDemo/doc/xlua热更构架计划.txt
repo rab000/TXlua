@@ -29,3 +29,6 @@ luamonoÉÏ¹Òluastr£¬¶¯Ì¬¼ÓÔØprefab¾Í¿ÉÒÔ£¬uimgrÖ±½Óµ÷ÓÃwinName¼ÓÔØprefab£¬Ö»ÒªÈ·¶
 
 //NTODO ºóÐøÖð²½²¹³äÒÅÂ©
 //NTODO ºóÐøÖð²½²¹³äÐÔÄÜÏà¹ØÎÊÌâ
+
+
+//NTODO ÒÉÎÊ:requireµ½µ×ÔÚ×öÊ²Ã´£¬ÎªÊ²Ã´ÒýÈë²»ÁË»·¾³£¬ÔõÃ´·Ö¿ªÁ½ÌõÃüÁîÖ¸¶¨»·¾³
