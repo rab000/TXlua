@@ -1,7 +1,7 @@
 print("test_hotfix start");
  
---xlua.private_accessible(CS.MyExamples.Hotfix);  
+xlua.private_accessible(CS.NTHotfix.CSharpMono4Hotfix);  
  
---xlua.hotfix(CS.MyExamples.Hotfix, "Show", function(self)  
---    print("lua---Show");
---end)
+xlua.hotfix(CS.NTHotfix.CSharpMono4Hotfix, "Show", function(self)  
+    print("lua logic AAA");
+end)

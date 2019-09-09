@@ -23,7 +23,8 @@ required会重复加载，避免重复加载的方法如下
 package.loaded[‘test.lua’] = nil
 required(‘test.lua’)
 
-
+关于缓存c#调用lua函数的例子
+https://www.e-learn.cn/content/qita/788501
 
 官网教程
 https://github.com/Tencent/xLua

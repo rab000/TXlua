@@ -21,13 +21,17 @@ namespace NXLua
         //public TextAsset luaScript;
         //lua文件沙盒中相对位置,自定义loader再TLuaMgr中就已经设置好了，这类直接传入相对路径
         public string LuaRelePath;
-        private bool BeLoadLuaStr = false;
-        public Injection[] injections;
-        public bool dontDestroyOnLoad;
-        //internal static LuaEnv luaEnv = new LuaEnv(); //all lua behaviour shared one luaenv only!
 
+        private bool BeLoadLuaStr = false;
+
+        public Injection[] injections;
+
+        public bool dontDestroyOnLoad;
+        
         private Action luaStart;
+
         private Action luaUpdate;
+
         private Action luaOnDestroy;
 
         private LuaTable scriptEnv;
@@ -71,7 +75,7 @@ namespace NXLua
             }
             Debug.Log("TLuaBehaviour.Awake 设置self 各种go环境完毕");
 
-            //nafio inforequire加载的时候，后面的scriptEnv没生效，
+            //nafio info require加载的时候，后面的scriptEnv没生效，
             //但是直接加载str是生效的，要研究下怎么给一段lua设置环境
             //_LuaEnv.DoString(string.Format("require '{0}'",LuaRelePath)/*luaScript.text*/, "TLuaBehaviour", scriptEnv);
             //TLuaMgr._LuaEnv.DoString(s/*luaScript.text*/, "TLuaBehaviour", scriptEnv);

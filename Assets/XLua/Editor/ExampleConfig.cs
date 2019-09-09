@@ -143,11 +143,11 @@ public static class ExampleConfig
     //    get
     //    {
     //        return (from type in Assembly.Load("Assembly-CSharp").GetExportedTypes()
-    //                           where type.Namespace == null || !type.Namespace.StartsWith("XLua")
-    //                           select type);
+    //                where type.Namespace == null || !type.Namespace.StartsWith("XLua")
+    //                select type);
     //    }
     //}
-    //--------------begin 热补丁自动化配置-------------------------
+    ////--------------begin 热补丁自动化配置-------------------------
     //static bool hasGenericParameter(Type type)
     //{
     //    if (type.IsGenericTypeDefinition) return true;
@@ -208,7 +208,7 @@ public static class ExampleConfig
     //    return method.GetParameters().Any(pinfo => typeHasEditorRef(pinfo.ParameterType));
     //}
 
-    // 配置某Assembly下所有涉及到的delegate到CSharpCallLua下，Hotfix下拿不准那些delegate需要适配到lua function可以这么配置
+    //// 配置某Assembly下所有涉及到的delegate到CSharpCallLua下，Hotfix下拿不准那些delegate需要适配到lua function可以这么配置
     //[CSharpCallLua]
     //static IEnumerable<Type> AllDelegate
     //{
