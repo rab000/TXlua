@@ -25,8 +25,6 @@ namespace NXLua
         public Injection[] injections;
         public bool dontDestroyOnLoad;
         //internal static LuaEnv luaEnv = new LuaEnv(); //all lua behaviour shared one luaenv only!
-        internal static float lastGCTime = 0;
-        internal const float GCInterval = 1;//1 second 
 
         private Action luaStart;
         private Action luaUpdate;
@@ -155,11 +153,7 @@ namespace NXLua
             {
                 luaUpdate();
             }
-            if (Time.time - TLuaBehaviour.lastGCTime > GCInterval)
-            {
-                TLuaMgr._LuaEnv.Tick();
-                TLuaBehaviour.lastGCTime = Time.time;
-            }
+            
         }
 
         void OnDestroy()
