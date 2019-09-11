@@ -16,7 +16,7 @@ namespace NXLua {
         /// <summary>
         /// LuaEnv对应Lua虚拟机，全局唯一
         /// </summary>
-        public static LuaEnv _LuaEnv = new LuaEnv();
+        public static LuaEnv _LuaEnv;
 
         public static TLuaMgr Ins;
 
@@ -29,21 +29,20 @@ namespace NXLua {
         private void Awake()
         {
             Ins = this;
-			DontDestroyOnLoad (gameObject);
-            TStart();
-        }
 
-		public void TStart()
-		{
+			DontDestroyOnLoad (gameObject);
+
+            _LuaEnv = new LuaEnv();
+
             //_LuaEnv.AddLoader(MyLoader);
             //注意这里可以写相对路径，一旦自己设置了自定义的loader后，貌似Resource中的main就找不到
             //_LuaEnv.DoString("require 'test/main'");
 
             //先从本地Resources中读，上面注掉的是从沙盒读
             _LuaEnv.DoString("require 'main'");
-
         }
 
+		
         void Update()
         {
             if (Time.time - TLuaMgr.lastGCTime > GCInterval)
@@ -59,9 +58,17 @@ namespace NXLua {
 			string path = Application.persistentDataPath + "/" + filePath + ".lua.txt";
             //Debug.LogError("---------->path:"+path);
             //path:C:/Users/1/AppData/LocalLow/DefaultCompany/TXlua/main.lua.txt
-    
-            string str = File.ReadAllText (path);
-			return System.Text.Encoding.UTF8.GetBytes (str);
+            if (!File.Exists(path))
+            {
+                Debug.LogError("TLuaMgr.MyLoader lua not exist path:" + path);
+                return null;
+            }
+            else
+            {
+                string str = File.ReadAllText(path);
+                return System.Text.Encoding.UTF8.GetBytes(str);
+            }
+            
         }
 
         public void Dispose()
