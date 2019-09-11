@@ -26,6 +26,9 @@ required(‘test.lua’)
 关于缓存c#调用lua函数的例子
 https://www.e-learn.cn/content/qita/788501
 
+知乎，类似官网教程
+https://zhuanlan.zhihu.com/p/38322991
+
 官网教程
 https://github.com/Tencent/xLua
 

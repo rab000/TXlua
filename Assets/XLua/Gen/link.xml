@@ -34,33 +34,13 @@
 		<type fullname="UnityEngine.Mathf" preserve="all"/>
 		<type fullname="UnityEngine.Debug" preserve="all"/>
 		<type fullname="UnityEngine.WaitForSeconds" preserve="all"/>
-		<type fullname="UnityEngine.AndroidInput" preserve="all"/>
-		<type fullname="UnityEngine.AndroidJavaObject" preserve="all"/>
-		<type fullname="UnityEngine.AndroidJavaClass" preserve="all"/>
-		<type fullname="UnityEngine.AndroidJavaException" preserve="all"/>
-		<type fullname="UnityEngine.AndroidJavaProxy" preserve="all"/>
-		<type fullname="UnityEngine.jvalue" preserve="all"/>
-		<type fullname="UnityEngine.AndroidJNIHelper" preserve="all"/>
-		<type fullname="UnityEngine.AndroidJNI" preserve="all"/>
 		<type fullname="UnityEngine.Application" preserve="all"/>
 		<type fullname="UnityEngine.AsyncOperation" preserve="all"/>
-		<type fullname="UnityEngine.DisallowMultipleComponent" preserve="all"/>
-		<type fullname="UnityEngine.RequireComponent" preserve="all"/>
-		<type fullname="UnityEngine.AddComponentMenu" preserve="all"/>
-		<type fullname="UnityEngine.CreateAssetMenuAttribute" preserve="all"/>
-		<type fullname="UnityEngine.ContextMenu" preserve="all"/>
-		<type fullname="UnityEngine.ExecuteInEditMode" preserve="all"/>
 		<type fullname="UnityEngine.ExecuteAlways" preserve="all"/>
-		<type fullname="UnityEngine.HideInInspector" preserve="all"/>
-		<type fullname="UnityEngine.HelpURLAttribute" preserve="all"/>
 		<type fullname="UnityEngine.DefaultExecutionOrder" preserve="all"/>
-		<type fullname="UnityEngine.AssemblyIsEditorAssembly" preserve="all"/>
-		<type fullname="UnityEngine.ExcludeFromPresetAttribute" preserve="all"/>
-		<type fullname="UnityEngine.BeforeRenderOrderAttribute" preserve="all"/>
 		<type fullname="UnityEngine.BillboardAsset" preserve="all"/>
 		<type fullname="UnityEngine.BillboardRenderer" preserve="all"/>
 		<type fullname="UnityEngine.BoundsInt" preserve="all"/>
-		<type fullname="UnityEngine.BoundsInt+PositionEnumerator" preserve="all"/>
 		<type fullname="UnityEngine.CachedAssetBundle" preserve="all"/>
 		<type fullname="UnityEngine.Cache" preserve="all"/>
 		<type fullname="UnityEngine.Caching" preserve="all"/>
@@ -74,15 +54,11 @@
 		<type fullname="UnityEngine.BoundingSphere" preserve="all"/>
 		<type fullname="UnityEngine.CullingGroupEvent" preserve="all"/>
 		<type fullname="UnityEngine.CullingGroup" preserve="all"/>
-		<type fullname="UnityEngine.Cursor" preserve="all"/>
 		<type fullname="UnityEngine.CustomYieldInstruction" preserve="all"/>
 		<type fullname="UnityEngine.Display" preserve="all"/>
-		<type fullname="UnityEngine.EventProvider" preserve="all"/>
-		<type fullname="UnityEngine.ExcludeFromObjectFactoryAttribute" preserve="all"/>
 		<type fullname="UnityEngine.ExposedPropertyResolver" preserve="all"/>
 		<type fullname="UnityEngine.FlareLayer" preserve="all"/>
 		<type fullname="UnityEngine.GeometryUtility" preserve="all"/>
-		<type fullname="UnityEngine.Gizmos" preserve="all"/>
 		<type fullname="UnityEngine.GradientColorKey" preserve="all"/>
 		<type fullname="UnityEngine.GradientAlphaKey" preserve="all"/>
 		<type fullname="UnityEngine.Gradient" preserve="all"/>
@@ -123,9 +99,6 @@
 		<type fullname="UnityEngine.LightProbeProxyVolume" preserve="all"/>
 		<type fullname="UnityEngine.MeshRenderer" preserve="all"/>
 		<type fullname="UnityEngine.RectOffset" preserve="all"/>
-		<type fullname="UnityEngine.GUIElement" preserve="all"/>
-		<type fullname="UnityEngine.Handheld" preserve="all"/>
-		<type fullname="UnityEngine.TouchScreenKeyboard" preserve="all"/>
 		<type fullname="UnityEngine.Hash128" preserve="all"/>
 		<type fullname="UnityEngine.HashUtilities" preserve="all"/>
 		<type fullname="UnityEngine.HashUnsafeUtilities" preserve="all"/>
@@ -145,41 +118,21 @@
 		<type fullname="UnityEngine.Matrix4x4" preserve="all"/>
 		<type fullname="UnityEngine.BoneWeight" preserve="all"/>
 		<type fullname="UnityEngine.CombineInstance" preserve="all"/>
-		<type fullname="UnityEngine.Ping" preserve="all"/>
 		<type fullname="UnityEngine.Plane" preserve="all"/>
 		<type fullname="UnityEngine.PlayerPrefsException" preserve="all"/>
 		<type fullname="UnityEngine.PlayerPrefs" preserve="all"/>
 		<type fullname="UnityEngine.Pose" preserve="all"/>
-		<type fullname="UnityEngine.PropertyAttribute" preserve="all"/>
-		<type fullname="UnityEngine.ContextMenuItemAttribute" preserve="all"/>
-		<type fullname="UnityEngine.TooltipAttribute" preserve="all"/>
-		<type fullname="UnityEngine.SpaceAttribute" preserve="all"/>
-		<type fullname="UnityEngine.HeaderAttribute" preserve="all"/>
-		<type fullname="UnityEngine.RangeAttribute" preserve="all"/>
-		<type fullname="UnityEngine.MinAttribute" preserve="all"/>
-		<type fullname="UnityEngine.MultilineAttribute" preserve="all"/>
-		<type fullname="UnityEngine.TextAreaAttribute" preserve="all"/>
-		<type fullname="UnityEngine.ColorUsageAttribute" preserve="all"/>
-		<type fullname="UnityEngine.GradientUsageAttribute" preserve="all"/>
-		<type fullname="UnityEngine.DelayedAttribute" preserve="all"/>
 		<type fullname="UnityEngine.PropertyName" preserve="all"/>
 		<type fullname="UnityEngine.Random" preserve="all"/>
 		<type fullname="UnityEngine.Random+State" preserve="all"/>
 		<type fullname="UnityEngine.RangeInt" preserve="all"/>
 		<type fullname="UnityEngine.Rect" preserve="all"/>
 		<type fullname="UnityEngine.RectInt" preserve="all"/>
-		<type fullname="UnityEngine.RectInt+PositionEnumerator" preserve="all"/>
 		<type fullname="UnityEngine.ReflectionProbe" preserve="all"/>
 		<type fullname="UnityEngine.ResourceRequest" preserve="all"/>
-		<type fullname="UnityEngine.RuntimeInitializeOnLoadMethodAttribute" preserve="all"/>
 		<type fullname="UnityEngine.ScriptableObject" preserve="all"/>
 		<type fullname="UnityEngine.Security" preserve="all"/>
-		<type fullname="UnityEngine.Types" preserve="all"/>
-		<type fullname="UnityEngine.SelectionBaseAttribute" preserve="all"/>
-		<type fullname="UnityEngine.SerializeField" preserve="all"/>
 		<type fullname="UnityEngine.PreferBinarySerialization" preserve="all"/>
-		<type fullname="UnityEngine.ShaderVariantCollection" preserve="all"/>
-		<type fullname="UnityEngine.ShaderVariantCollection+ShaderVariant" preserve="all"/>
 		<type fullname="UnityEngine.ComputeShader" preserve="all"/>
 		<type fullname="UnityEngine.SortingLayer" preserve="all"/>
 		<type fullname="UnityEngine.StackTraceUtility" preserve="all"/>
@@ -199,8 +152,6 @@
 		<type fullname="UnityEngine.CustomRenderTextureUpdateZone" preserve="all"/>
 		<type fullname="UnityEngine.CustomRenderTexture" preserve="all"/>
 		<type fullname="UnityEngine.RenderTextureDescriptor" preserve="all"/>
-		<type fullname="UnityEngine.TrackedReference" preserve="all"/>
-		<type fullname="UnityEngine.UnityAPICompatibilityVersionAttribute" preserve="all"/>
 		<type fullname="UnityEngine.UnityEventQueueSystem" preserve="all"/>
 		<type fullname="UnityEngine.Vector2Int" preserve="all"/>
 		<type fullname="UnityEngine.Vector3Int" preserve="all"/>
@@ -211,8 +162,6 @@
 		<type fullname="UnityEngine.WaitWhile" preserve="all"/>
 		<type fullname="UnityEngine.YieldInstruction" preserve="all"/>
 		<type fullname="UnityEngine.DynamicGI" preserve="all"/>
-		<type fullname="UnityEngine.iPhoneSettings" preserve="all"/>
-		<type fullname="UnityEngine.iPhoneUtils" preserve="all"/>
 		<type fullname="UnityEngine.Logger" preserve="all"/>
 		<type fullname="UnityEngine.StaticBatchingUtility" preserve="all"/>
 		<type fullname="UnityEngine.DrivenRectTransformTracker" preserve="all"/>
@@ -228,7 +177,6 @@
 		<type fullname="UnityEngine.Animation" preserve="all"/>
 		<type fullname="UnityEngine.AnimationState" preserve="all"/>
 		<type fullname="UnityEngine.Animator" preserve="all"/>
-		<type fullname="UnityEngine.SharedBetweenAnimatorsAttribute" preserve="all"/>
 		<type fullname="UnityEngine.StateMachineBehaviour" preserve="all"/>
 		<type fullname="UnityEngine.AnimatorClipInfo" preserve="all"/>
 		<type fullname="UnityEngine.AnimatorStateInfo" preserve="all"/>
@@ -247,7 +195,6 @@
 		<type fullname="UnityEngine.HumanPose" preserve="all"/>
 		<type fullname="UnityEngine.HumanPoseHandler" preserve="all"/>
 		<type fullname="UnityEngine.HumanTrait" preserve="all"/>
-		<type fullname="UnityEngine.Motion" preserve="all"/>
 		<type fullname="UnityEngine.RuntimeAnimatorController" preserve="all"/>
 		
 	</assembly>
@@ -292,6 +239,7 @@
 	    <type fullname="Tutorial.BaseClass" preserve="all"/>
 		<type fullname="Tutorial.TestEnum" preserve="all"/>
 		<type fullname="Tutorial.DerivedClass" preserve="all"/>
+		<type fullname="Tutorial.DerivedClass+TestEnumInner" preserve="all"/>
 		<type fullname="Tutorial.ICalc" preserve="all"/>
 		<type fullname="Tutorial.DerivedClassExtensions" preserve="all"/>
 		<type fullname="XLuaTest.LuaBehaviour" preserve="all"/>
@@ -307,12 +255,13 @@
 		<type fullname="XLuaTest.Foo" preserve="all"/>
 		<type fullname="XLuaTest.FooExtension" preserve="all"/>
 		<type fullname="NXLua.TLuaBehaviour" preserve="all"/>
-		<type fullname="Tutorial.DerivedClass+TestEnumInner" preserve="all"/>
+		<type fullname="HotfixDemo" preserve="all"/>
 		<type fullname="UIDemo" preserve="all"/>
 		<type fullname="TLuaHotFixMgr" preserve="all"/>
 		<type fullname="ExampleGenConfig" preserve="all"/>
 		<type fullname="LuaCallCs" preserve="all"/>
 		<type fullname="Tutorial.CSCallLua" preserve="all"/>
+		<type fullname="Tutorial.CSCallLua+DClass" preserve="all"/>
 		<type fullname="Tutorial.ByFile" preserve="all"/>
 		<type fullname="Tutorial.ByString" preserve="all"/>
 		<type fullname="Tutorial.CustomLoader" preserve="all"/>
@@ -320,7 +269,6 @@
 		<type fullname="NXLua.Injection" preserve="all"/>
 		<type fullname="NXLua.TLuaMgr" preserve="all"/>
 		<type fullname="NTHotfix.CSharpMono4Hotfix" preserve="all"/>
-		<type fullname="Tutorial.CSCallLua+DClass" preserve="all"/>
 		
 	</assembly>
 
@@ -362,21 +310,6 @@
 		
 	</assembly>
 
-	<assembly fullname="UnityEngine.ClusterInputModule">
-	    <type fullname="UnityEngine.ClusterInput" preserve="all"/>
-		
-	</assembly>
-
-	<assembly fullname="UnityEngine.ClusterRendererModule">
-	    <type fullname="UnityEngine.ClusterNetwork" preserve="all"/>
-		
-	</assembly>
-
-	<assembly fullname="UnityEngine.GameCenterModule">
-	    <type fullname="UnityEngine.Social" preserve="all"/>
-		
-	</assembly>
-
 	<assembly fullname="UnityEngine.GridModule">
 	    <type fullname="UnityEngine.Grid" preserve="all"/>
 		<type fullname="UnityEngine.GridLayout" preserve="all"/>
@@ -385,27 +318,6 @@
 
 	<assembly fullname="UnityEngine.IMGUIModule">
 	    <type fullname="UnityEngine.Event" preserve="all"/>
-		<type fullname="UnityEngine.GUI" preserve="all"/>
-		<type fullname="UnityEngine.GUI+Scope" preserve="all"/>
-		<type fullname="UnityEngine.GUI+GroupScope" preserve="all"/>
-		<type fullname="UnityEngine.GUI+ScrollViewScope" preserve="all"/>
-		<type fullname="UnityEngine.GUI+ClipScope" preserve="all"/>
-		<type fullname="UnityEngine.GUIContent" preserve="all"/>
-		<type fullname="UnityEngine.GUILayout" preserve="all"/>
-		<type fullname="UnityEngine.GUILayout+HorizontalScope" preserve="all"/>
-		<type fullname="UnityEngine.GUILayout+VerticalScope" preserve="all"/>
-		<type fullname="UnityEngine.GUILayout+AreaScope" preserve="all"/>
-		<type fullname="UnityEngine.GUILayout+ScrollViewScope" preserve="all"/>
-		<type fullname="UnityEngine.GUILayoutOption" preserve="all"/>
-		<type fullname="UnityEngine.GUILayoutUtility" preserve="all"/>
-		<type fullname="UnityEngine.GUISettings" preserve="all"/>
-		<type fullname="UnityEngine.GUISkin" preserve="all"/>
-		<type fullname="UnityEngine.GUIStyleState" preserve="all"/>
-		<type fullname="UnityEngine.GUIStyle" preserve="all"/>
-		<type fullname="UnityEngine.GUITargetAttribute" preserve="all"/>
-		<type fullname="UnityEngine.GUIUtility" preserve="all"/>
-		<type fullname="UnityEngine.ExitGUIException" preserve="all"/>
-		<type fullname="UnityEngine.TextEditor" preserve="all"/>
 		
 	</assembly>
 
@@ -522,27 +434,12 @@
 	</assembly>
 
 	<assembly fullname="UnityEngine.TerrainModule">
-	    <type fullname="UnityEngine.Terrain" preserve="all"/>
-		<type fullname="UnityEngine.TerrainExtensions" preserve="all"/>
-		<type fullname="UnityEngine.Tree" preserve="all"/>
-		<type fullname="UnityEngine.TreePrototype" preserve="all"/>
-		<type fullname="UnityEngine.DetailPrototype" preserve="all"/>
-		<type fullname="UnityEngine.SplatPrototype" preserve="all"/>
-		<type fullname="UnityEngine.TreeInstance" preserve="all"/>
-		<type fullname="UnityEngine.PatchExtents" preserve="all"/>
-		<type fullname="UnityEngine.TerrainData" preserve="all"/>
-		<type fullname="UnityEngine.TerrainLayer" preserve="all"/>
-		
-	</assembly>
-
-	<assembly fullname="UnityEngine.TerrainPhysicsModule">
-	    <type fullname="UnityEngine.TerrainCollider" preserve="all"/>
+	    <type fullname="UnityEngine.PatchExtents" preserve="all"/>
 		
 	</assembly>
 
 	<assembly fullname="UnityEngine.TextRenderingModule">
 	    <type fullname="UnityEngine.TextGenerationSettings" preserve="all"/>
-		<type fullname="UnityEngine.TextGenerator" preserve="all"/>
 		<type fullname="UnityEngine.TextMesh" preserve="all"/>
 		<type fullname="UnityEngine.CharacterInfo" preserve="all"/>
 		<type fullname="UnityEngine.UICharInfo" preserve="all"/>
@@ -553,8 +450,7 @@
 	</assembly>
 
 	<assembly fullname="UnityEngine.TilemapModule">
-	    <type fullname="UnityEngine.CustomGridBrushAttribute" preserve="all"/>
-		<type fullname="UnityEngine.GridBrushBase" preserve="all"/>
+	    <type fullname="UnityEngine.GridBrushBase" preserve="all"/>
 		
 	</assembly>
 
@@ -575,11 +471,6 @@
 
 	<assembly fullname="UnityEngine.UnityWebRequestModule">
 	    <type fullname="UnityEngine.WWWForm" preserve="all"/>
-		
-	</assembly>
-
-	<assembly fullname="UnityEngine.UnityWebRequestWWWModule">
-	    <type fullname="UnityEngine.WWWAudioExtensions" preserve="all"/>
 		
 	</assembly>
 
@@ -610,7 +501,6 @@
 		<type fullname="UnityEngine.UI.FontUpdateTracker" preserve="all"/>
 		<type fullname="UnityEngine.UI.Graphic" preserve="all"/>
 		<type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all"/>
-		<type fullname="UnityEngine.UI.GraphicRebuildTracker" preserve="all"/>
 		<type fullname="UnityEngine.UI.GraphicRegistry" preserve="all"/>
 		<type fullname="UnityEngine.UI.Image" preserve="all"/>
 		<type fullname="UnityEngine.UI.InputField" preserve="all"/>

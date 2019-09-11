@@ -4,7 +4,7 @@ using UnityEngine;
 using XLua;
 namespace NTHotfix
 {
-    [Hotfix]
+    //[Hotfix]
     public class CSharpMono4Hotfix : MonoBehaviour
     {
 
@@ -13,19 +13,6 @@ namespace NTHotfix
         void Awake()
         {
             Ins = this;
-        }
-
-        void Start()
-        {
-            //Debug.Log("CSharp logic!!!");
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.A))
-            {
-                Show();               
-            }
         }
 
         public void Show()

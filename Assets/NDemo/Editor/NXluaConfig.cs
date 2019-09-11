@@ -15,6 +15,7 @@ public static class NXluaConfig
     {
         get
         {
+            //设置包名
             List<string> namespaces = new List<string>() // 在这里添加名字空间
             {
                 "UnityEngine",
@@ -27,6 +28,7 @@ public static class NXluaConfig
                                       && type.BaseType != typeof(MulticastDelegate) && !type.IsInterface && !type.IsEnum
                               select type);
 
+            //设置程序集
             string[] customAssemblys = new string[] {
                 "Assembly-CSharp",
             };
@@ -35,80 +37,74 @@ public static class NXluaConfig
                                where type.Namespace == null || !type.Namespace.StartsWith("XLua")
                                        && type.BaseType != typeof(MulticastDelegate) && !type.IsInterface && !type.IsEnum
                                select type);
+
             return unityTypes.Concat(customTypes);
         }
     }
 
     //自动把LuaCallCSharp涉及到的delegate加到CSharpCallLua列表，后续可以直接用lua函数做callback
-    //[CSharpCallLua]
-    //public static List<Type> CSharpCallLua
-    //{
-    //    get
-    //    {
-    //        var lua_call_csharp = LuaCallCSharp;
-    //        var delegate_types = new List<Type>();
-    //        var flag = BindingFlags.Public | BindingFlags.Instance
-    //            | BindingFlags.Static | BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly;
-    //        foreach (var field in (from type in lua_call_csharp select type).SelectMany(type => type.GetFields(flag)))
-    //        {
-    //            if (typeof(Delegate).IsAssignableFrom(field.FieldType))
-    //            {
-    //                delegate_types.Add(field.FieldType);
-    //            }
-    //        }
-
-    //        foreach (var method in (from type in lua_call_csharp select type).SelectMany(type => type.GetMethods(flag)))
-    //        {
-    //            if (typeof(Delegate).IsAssignableFrom(method.ReturnType))
-    //            {
-    //                delegate_types.Add(method.ReturnType);
-    //            }
-    //            foreach (var param in method.GetParameters())
-    //            {
-    //                var paramType = param.ParameterType.IsByRef ? param.ParameterType.GetElementType() : param.ParameterType;
-    //                if (typeof(Delegate).IsAssignableFrom(paramType))
-    //                {
-    //                    delegate_types.Add(paramType);
-    //                }
-    //            }
-    //        }
-    //        return delegate_types.Distinct().ToList();
-    //    }
-    //}
-
-    //[Hotfix]
-    //public static List<Type> hotfixList
-    //{
-    //    get
-    //    {
-    //        string[] allowNamespaces = new string[] {
-    //                "NTHotfix",
-    //        };
-
-    //        return (from type in Assembly.Load("Assembly-CSharp").GetTypes()
-    //                where allowNamespaces.Contains(type.Namespace)
-    //                select type).ToList();
-    //    }
-
-    //}
-
-    [Hotfix]
-    public static List<Type> by_field = new List<Type>()
+    [CSharpCallLua]
+    public static List<Type> CSharpCallLua
     {
-        typeof(NTHotfix.CSharpMono4Hotfix),
-        //typeof(GenericClass<>),
-    };
+        get
+        {
+            var lua_call_csharp = LuaCallCSharp;
+            var delegate_types = new List<Type>();
+            var flag = BindingFlags.Public | BindingFlags.Instance
+                | BindingFlags.Static | BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly;
+            foreach (var field in (from type in lua_call_csharp select type).SelectMany(type => type.GetFields(flag)))
+            {
+                if (typeof(Delegate).IsAssignableFrom(field.FieldType))
+                {
+                    delegate_types.Add(field.FieldType);
+                }
+            }
 
+            foreach (var method in (from type in lua_call_csharp select type).SelectMany(type => type.GetMethods(flag)))
+            {
+                if (typeof(Delegate).IsAssignableFrom(method.ReturnType))
+                {
+                    delegate_types.Add(method.ReturnType);
+                }
+                foreach (var param in method.GetParameters())
+                {
+                    var paramType = param.ParameterType.IsByRef ? param.ParameterType.GetElementType() : param.ParameterType;
+                    if (typeof(Delegate).IsAssignableFrom(paramType))
+                    {
+                        delegate_types.Add(paramType);
+                    }
+                }
+            }
+            return delegate_types.Distinct().ToList();
+        }
+    }
+
+    //方式1 动态
+    [Hotfix]
+    public static List<Type> hotfixList
+    {
+        get
+        {
+            string[] allowNamespaces = new string[] {
+                    "NTHotfix",
+            };
+
+            return (from type in Assembly.Load("Assembly-CSharp").GetTypes()
+                    where allowNamespaces.Contains(type.Namespace)
+                    select type).ToList();
+        }
+
+    }
+
+    //方式2 静态
     //[Hotfix]
-    //public static List<Type> by_property
+    //public static List<Type> by_field = new List<Type>()
     //{
-    //    get
-    //    {
-    //        return (from type in Assembly.Load("Assembly-CSharp").GetTypes()
-    //                where type.Namespace == "NTHotfix"
-    //                select type).ToList();
-    //    }
-    //}
+    //    typeof(NTHotfix.CSharpMono4Hotfix),
+    //    typeof(GenericClass<>),
+    //};
+
+    
 
 
     [BlackList]
@@ -155,42 +151,42 @@ public static class NXluaConfig
 
     static List<string> exclude = new List<string>
     {
-        //    "HideInInspector", "ExecuteInEditMode",
-        //    "AddComponentMenu", "ContextMenu",
-        //    "RequireComponent", "DisallowMultipleComponent",
-        //    "SerializeField", "AssemblyIsEditorAssembly",
-        //    "Attribute", "Types",
-        //    "UnitySurrogateSelector", "TrackedReference",
-        //    "TypeInferenceRules", "FFTWindow",
-        //    "RPC", "Network", "MasterServer",
-        //    "BitStream", "HostData",
-        //    "ConnectionTesterStatus", "GUI", "EventType",
-        //    "EventModifiers", "FontStyle", "TextAlignment",
-        //    "TextEditor", "TextEditorDblClickSnapping",
-        //    "TextGenerator", "TextClipping", "Gizmos",
-        //    "ADBannerView", "ADInterstitialAd",
-        //    "Android", "Tizen", "jvalue",
-        //    "iPhone", "iOS", "Windows", "CalendarIdentifier",
-        //    "CalendarUnit", "CalendarUnit",
-        //    "ClusterInput", "FullScreenMovieControlMode",
-        //    "FullScreenMovieScalingMode", "Handheld",
-        //    "LocalNotification", "NotificationServices",
-        //    "RemoteNotificationType", "RemoteNotification",
-        //    "SamsungTV", "TextureCompressionQuality",
-        //    "TouchScreenKeyboardType", "TouchScreenKeyboard",
-        //    "MovieTexture", "UnityEngineInternal",
-        //    "Terrain", "Tree", "SplatPrototype",
-        //    "DetailPrototype", "DetailRenderMode",
-        //    "MeshSubsetCombineUtility", "AOT", "Social", "Enumerator",
-        //    "SendMouseEvents", "Cursor", "Flash", "ActionScript",
-        //    "OnRequestRebuild", "Ping",
-        //    "ShaderVariantCollection", "SimpleJson.Reflection",
-        //    "CoroutineTween", "GraphicRebuildTracker",
-        //    "Advertisements", "UnityEditor", "WSA",
-        //    "EventProvider", "Apple",
-        //    "ClusterInput", "Motion",
-        //    "UnityEngine.UI.ReflectionMethodsCache", "NativeLeakDetection",
-        //    "NativeLeakDetectionMode", "WWWAudioExtensions", "UnityEngine.Experimental",
+            "HideInInspector", "ExecuteInEditMode",
+            "AddComponentMenu", "ContextMenu",
+            "RequireComponent", "DisallowMultipleComponent",
+            "SerializeField", "AssemblyIsEditorAssembly",
+            "Attribute", "Types",
+            "UnitySurrogateSelector", "TrackedReference",
+            "TypeInferenceRules", "FFTWindow",
+            "RPC", "Network", "MasterServer",
+            "BitStream", "HostData",
+            "ConnectionTesterStatus", "GUI", "EventType",
+            "EventModifiers", "FontStyle", "TextAlignment",
+            "TextEditor", "TextEditorDblClickSnapping",
+            "TextGenerator", "TextClipping", "Gizmos",
+            "ADBannerView", "ADInterstitialAd",
+            "Android", "Tizen", "jvalue",
+            "iPhone", "iOS", "Windows", "CalendarIdentifier",
+            "CalendarUnit", "CalendarUnit",
+            "ClusterInput", "FullScreenMovieControlMode",
+            "FullScreenMovieScalingMode", "Handheld",
+            "LocalNotification", "NotificationServices",
+            "RemoteNotificationType", "RemoteNotification",
+            "SamsungTV", "TextureCompressionQuality",
+            "TouchScreenKeyboardType", "TouchScreenKeyboard",
+            "MovieTexture", "UnityEngineInternal",
+            "Terrain", "Tree", "SplatPrototype",
+            "DetailPrototype", "DetailRenderMode",
+            "MeshSubsetCombineUtility", "AOT", "Social", "Enumerator",
+            "SendMouseEvents", "Cursor", "Flash", "ActionScript",
+            "OnRequestRebuild", "Ping",
+            "ShaderVariantCollection", "SimpleJson.Reflection",
+            "CoroutineTween", "GraphicRebuildTracker",
+            "Advertisements", "UnityEditor", "WSA",
+            "EventProvider", "Apple",
+            "ClusterInput", "Motion",
+            "UnityEngine.UI.ReflectionMethodsCache", "NativeLeakDetection",
+            "NativeLeakDetectionMode", "WWWAudioExtensions", "UnityEngine.Experimental",
     };
 
 }

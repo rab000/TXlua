@@ -32,12 +32,14 @@ namespace XLua.CSObjectWrap
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 1, 0, 0);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 1, 1, 1);
 			
 			
             
-			
-			
+			Utils.RegisterFunc(L, Utils.CLS_GETTER_IDX, "Ins", _g_get_Ins);
+            
+			Utils.RegisterFunc(L, Utils.CLS_SETTER_IDX, "Ins", _s_set_Ins);
+            
 			
 			Utils.EndClassRegister(type, L, translator);
         }
@@ -102,7 +104,32 @@ namespace XLua.CSObjectWrap
         
         
         
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_Ins(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			    translator.Push(L, NTHotfix.CSharpMono4Hotfix.Ins);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
         
+        
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _s_set_Ins(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			    NTHotfix.CSharpMono4Hotfix.Ins = (NTHotfix.CSharpMono4Hotfix)translator.GetObject(L, 1, typeof(NTHotfix.CSharpMono4Hotfix));
+            
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 0;
+        }
         
 		
 		
