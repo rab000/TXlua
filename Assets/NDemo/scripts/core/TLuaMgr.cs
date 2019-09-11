@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XLua;
 using System.IO;
-
+using System;
 //记录下需要整理完成的功能
 //？c#所有调用lua的类应该统一到一个类中，并且要缓存，防止每次调用从全局表Get https://www.e-learn.cn/content/qita/788501
 //xxxx ？要载入多少个lua，这些lua通过遍历获取到?通过main.lua来直接载入就行,不需要其他方法
@@ -19,6 +19,16 @@ namespace NXLua {
         public static LuaEnv _LuaEnv;
 
         public static TLuaMgr Ins;
+
+        /// <summary>
+        /// 用于保存lua的require方法
+        /// </summary>
+        private Func<string, LuaTable> require;
+
+        /// <summary>
+        /// TLuaBehaviour中用户获取lua相关引用的方法
+        /// </summary>
+        private Func<object, object[], object> funcInvoke;
 
         /// <summary>
         /// lua定时GC
@@ -38,10 +48,21 @@ namespace NXLua {
             //注意这里可以写相对路径，一旦自己设置了自定义的loader后，貌似Resource中的main就找不到
             //_LuaEnv.DoString("require 'test/main'");
 
+            require = _LuaEnv.Global.Get<Func<string, LuaTable>>("require");
+            //Require("clone");
+            funcInvoke = Require("funcInvoke").Get<Func<object, object[], object>>("FuncInvoke");
+
             //先从本地Resources中读，上面注掉的是从沙盒读
             _LuaEnv.DoString("require 'main'");
+
         }
 
+        void OnDestroy()
+        {
+            require = null;
+            _LuaEnv.Dispose();
+            _LuaEnv = null;
+        }
 		
         void Update()
         {
@@ -71,11 +92,40 @@ namespace NXLua {
             
         }
 
-        public void Dispose()
+        /// <summary>
+        /// 用于调用lua的require方法
+        /// </summary>
+        /// <param name="luaPath"></param>
+        /// <returns></returns>
+        public LuaTable Require(string luaPath)
         {
-            _LuaEnv.Dispose();
-            GameObject.Destroy(gameObject);
+            try
+            {
+                return require(luaPath);
+            }
+            catch (LuaException le)
+            {
+                Debug.LogError(le.Message);
+                return null;
+            }
         }
+
+        /// <summary>
+        /// TLuaBehaviour中用户获取lua相关引用的方法
+        /// </summary>
+        public object FuncInvoke(object func, params object[] args)
+        {
+            try
+            {
+                return funcInvoke(func, args);
+            }
+            catch (LuaException le)
+            {
+                Debug.LogError(le.Message);
+                return null;
+            }
+        }
+
     }
 
 }

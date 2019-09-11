@@ -115,9 +115,6 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(Tutorial.DerivedClass), TutorialDerivedClassWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(Tutorial.DerivedClass.TestEnumInner), TutorialDerivedClassTestEnumInnerWrap.__Register);
-        
-        
             translator.DelayWrapLoader(typeof(Tutorial.ICalc), TutorialICalcWrap.__Register);
         
         
@@ -164,6 +161,9 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(NXLua.TLuaBehaviour), NXLuaTLuaBehaviourWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(Tutorial.DerivedClass.TestEnumInner), TutorialDerivedClassTestEnumInnerWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(UnityEngine.AnimationEvent), UnityEngineAnimationEventWrap.__Register);
@@ -1323,13 +1323,10 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(UnityEngine.UI.Shadow), UnityEngineUIShadowWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(HotfixDemo), HotfixDemoWrap.__Register);
-        
-        
             translator.DelayWrapLoader(typeof(UIDemo), UIDemoWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(TLuaHotFixMgr), TLuaHotFixMgrWrap.__Register);
+            translator.DelayWrapLoader(typeof(HotfixDemo), HotfixDemoWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(ExampleGenConfig), ExampleGenConfigWrap.__Register);
@@ -1339,9 +1336,6 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(Tutorial.CSCallLua), TutorialCSCallLuaWrap.__Register);
-        
-        
-            translator.DelayWrapLoader(typeof(Tutorial.CSCallLua.DClass), TutorialCSCallLuaDClassWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(Tutorial.ByFile), TutorialByFileWrap.__Register);
@@ -1363,6 +1357,9 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(NTHotfix.CSharpMono4Hotfix), NTHotfixCSharpMono4HotfixWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(Tutorial.CSCallLua.DClass), TutorialCSCallLuaDClassWrap.__Register);
         
         
         
@@ -1392,11 +1389,11 @@ namespace XLua.CSObjectWrap
             
             translator.AddInterfaceBridgeCreator(typeof(System.Collections.IEnumerator), SystemCollectionsIEnumeratorBridge.__Create);
             
+            translator.AddInterfaceBridgeCreator(typeof(XLuaTest.IExchanger), XLuaTestIExchangerBridge.__Create);
+            
             translator.AddInterfaceBridgeCreator(typeof(Tutorial.CSCallLua.ItfD), TutorialCSCallLuaItfDBridge.__Create);
             
             translator.AddInterfaceBridgeCreator(typeof(XLuaTest.InvokeLua.ICalc), XLuaTestInvokeLuaICalcBridge.__Create);
-            
-            translator.AddInterfaceBridgeCreator(typeof(XLuaTest.IExchanger), XLuaTestIExchangerBridge.__Create);
             
         }
         
