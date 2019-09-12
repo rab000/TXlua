@@ -49,9 +49,15 @@ namespace NXLua {
             //_LuaEnv.DoString("require 'test/main'");
 
             require = _LuaEnv.Global.Get<Func<string, LuaTable>>("require");
-            //Require("clone");
+
+            //nafio info c#接管lua的require方法实际可以考虑在代码中动态require
+            //像Require("clone")这句起始直接在main.lua中直接调用就ok
+            Require("clone");
+
             funcInvoke = Require("funcInvoke").Get<Func<object, object[], object>>("FuncInvoke");
 
+            //nafio info main.lua的主要作用是require其他的uiLua，hotfixLua，
+            //当c#有了Require方法后，初始调用main.lua其实是可有可无的
             //先从本地Resources中读，上面注掉的是从沙盒读
             _LuaEnv.DoString("require 'main'");
 
