@@ -26,7 +26,7 @@ namespace NXLua {
         private Func<string, LuaTable> require;
 
         /// <summary>
-        /// TLuaBehaviour中用户获取lua相关引用的方法
+        /// TLuaBehaviour中用户获取lua(文件本身)相关引用的方法
         /// </summary>
         private Func<object, object[], object> funcInvoke;
 

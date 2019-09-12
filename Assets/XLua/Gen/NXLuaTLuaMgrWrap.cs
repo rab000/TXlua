@@ -21,9 +21,10 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(NXLua.TLuaMgr);
-			Utils.BeginObjectRegister(type, L, translator, 0, 1, 0, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 2, 0, 0);
 			
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Dispose", _m_Dispose);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Require", _m_Require);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "FuncInvoke", _m_FuncInvoke);
 			
 			
 			
@@ -77,7 +78,7 @@ namespace XLua.CSObjectWrap
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_Dispose(RealStatePtr L)
+        static int _m_Require(RealStatePtr L)
         {
 		    try {
             
@@ -89,12 +90,44 @@ namespace XLua.CSObjectWrap
             
                 
                 {
+                    string _luaPath = LuaAPI.lua_tostring(L, 2);
                     
-                    gen_to_be_invoked.Dispose(  );
+                        XLua.LuaTable gen_ret = gen_to_be_invoked.Require( _luaPath );
+                        translator.Push(L, gen_ret);
                     
                     
                     
-                    return 0;
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_FuncInvoke(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                NXLua.TLuaMgr gen_to_be_invoked = (NXLua.TLuaMgr)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    object _func = translator.GetObject(L, 2, typeof(object));
+                    object[] _args = translator.GetParams<object>(L, 3);
+                    
+                        object gen_ret = gen_to_be_invoked.FuncInvoke( _func, _args );
+                        translator.PushAny(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
                 }
                 
             } catch(System.Exception gen_e) {
