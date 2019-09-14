@@ -1,0 +1,21 @@
+print("start test lua111")
+
+tb = {1,2,3,4,5}
+
+ttt = table.unpack(tb,1,5)
+
+cnm = {}
+
+a,b,c,d = table.unpack(tb)
+
+cnm = table.unpack(tb,1,5)
+
+print("result: "..ttt)
+
+print("a: "..a.." b:"..b)
+
+print(ttt)
+
+print(cnm)
+
+print("cnm type:"..type(cnm))

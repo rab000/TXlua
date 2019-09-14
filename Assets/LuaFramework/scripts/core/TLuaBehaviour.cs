@@ -34,7 +34,7 @@ namespace NXLua
 
         private Action luaOnDestroy;
 
-        private LuaTable scriptEnv;
+        private LuaTable scriptEnvTable;
 
         //string s = 
         //    @"function start()" +
@@ -55,22 +55,22 @@ namespace NXLua
             
             Debug.Log("TLuaBehaviour.Awake LuaRelePath!=null 继续执行Awake");
 
-            scriptEnv = TLuaMgr._LuaEnv.NewTable();
+            scriptEnvTable = TLuaMgr._LuaEnv.NewTable();
            
             // 为每个脚本设置一个独立的环境，可一定程度上防止脚本间全局变量、函数冲突
             LuaTable meta = TLuaMgr._LuaEnv.NewTable();
             meta.Set("__index", TLuaMgr._LuaEnv.Global);
             
-            scriptEnv.SetMetaTable(meta);
+            scriptEnvTable.SetMetaTable(meta);
             meta.Dispose();
 
-            scriptEnv.Set("self", this);//因为这句，暂时不能将所有lua统一从main.lua入口调用，在每个luaMono中单独调用
+            scriptEnvTable.Set("self", this);//因为这句，暂时不能将所有lua统一从main.lua入口调用，在每个luaMono中单独调用
 
             if (null != injections)
             {
                 foreach (var injection in injections)
                 {
-                    scriptEnv.Set(injection.name, injection.value);
+                    scriptEnvTable.Set(injection.name, injection.value);
                 }
             }
             Debug.Log("TLuaBehaviour.Awake 设置self 各种go环境完毕");
@@ -95,7 +95,7 @@ namespace NXLua
                 TextAsset textAsset = Resources.Load<TextAsset>(LuaRelePath+".lua");
                 Debug.LogError("加载到的txt--->" + textAsset.text);
                 //先加载lua txt 然后再导入后续string,这里加载需要时间，是个异步操作
-                luaFunc = TLuaMgr._LuaEnv.LoadString(textAsset.text, "TLuaBehaviour", scriptEnv);
+                luaFunc = TLuaMgr._LuaEnv.LoadString(textAsset.text, "TLuaBehaviour", scriptEnvTable);
                 LuaDic.Add(LuaRelePath, luaFunc);
                 AfterLuaLoaded(luaFunc);
 
@@ -107,17 +107,17 @@ namespace NXLua
         {
             BeLoadLuaStr = true;
 
-            luaFunc.SetEnv(scriptEnv);
+            luaFunc.SetEnv(scriptEnvTable);
 
             luaFunc.Call();
 
-            Action luaAwake = scriptEnv.Get<Action>("awake");
+            Action luaAwake = scriptEnvTable.Get<Action>("awake");
 
-            scriptEnv.Get("start", out luaStart);
+            scriptEnvTable.Get("start", out luaStart);
 
-            scriptEnv.Get("update", out luaUpdate);
+            scriptEnvTable.Get("update", out luaUpdate);
 
-            scriptEnv.Get("ondestroy", out luaOnDestroy);
+            scriptEnvTable.Get("ondestroy", out luaOnDestroy);
 
             if (luaAwake != null)
             {
@@ -173,7 +173,7 @@ namespace NXLua
             luaOnDestroy = null;
             luaUpdate = null;
             luaStart = null;
-            scriptEnv.Dispose();
+            scriptEnvTable.Dispose();
             injections = null;
         }
 
