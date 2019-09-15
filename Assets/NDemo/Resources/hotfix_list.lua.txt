@@ -1,5 +1,0 @@
-print("hotfix_list.lua start")
-
-return{
-	"hotfix/test_hotfix",
-}

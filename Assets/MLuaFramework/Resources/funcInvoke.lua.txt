@@ -1,0 +1,25 @@
+﻿local function FuncInvoke(func,args)
+    if func then
+        local count=args and args.Length or 0
+        local argTable={}
+        for index=1,count do
+            argTable[index]=args[index-1]
+			print("argTable:",argTable[index])
+        end
+
+		--print("test start")
+		--local tt = {}
+		--tt = table.unpack(argTable,1,count)
+		--print(#tt)						  UIMail 6
+		--print("unpack result:"..type(tt))   类型string
+		--print(tt)
+		--print("test end")
+		
+		local ss = table.unpack(argTable,1,count)
+		print("funcInvoke.unpack--->"..ss.." type:"..type(ss))
+        return func(ss)
+    end
+    return nil
+end
+
+return {FuncInvoke=FuncInvoke}

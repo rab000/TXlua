@@ -1,0 +1,5 @@
+关于自动标签配置
+xlua配置文件配置完，Genera code和inject后不会在c#代码中生成标签
+但是hotfix是生效的，每次修改标签或配置都需要重新Generate Code，Inject(编辑器下)，移动设备build时会自动注入
+
+

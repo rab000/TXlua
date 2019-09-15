@@ -1,0 +1,219 @@
+﻿require("LuaClass")
+
+print("start init UIMail--------------->0")
+UIMail = LuaClass.Class(nil,"UIMail")
+print("start init UIMail--------------->1")
+UIMail.behaviour = nil
+local this = UIMail
+print("start init UIMail--------------->2")
+local panel
+local mailID
+local mailTable
+local slotList = {}
+local Page = {
+    Notifications = 1,
+    Gifts = 2,
+    Custom = 3,
+}
+local curPage = 1
+print("start init UIMail--------------->3")
+function UIMail:MplOnlanguageChange()
+    CS.mpl.LuaUtils.SetLanguageId(self["Theme"]:GetComponent('MaskableGraphic'), CS.MergeTown.LanguageKeyDefine.k_220000001  )  --邮箱 标题
+    CS.mpl.LuaUtils.SetLanguageId(self["Null"].transform:Find('Des'):GetComponent('MaskableGraphic'), CS.MergeTown.LanguageKeyDefine.k_220000017  )  --邮箱为空
+    CS.mpl.LuaUtils.SetLanguageId(self["Accept"].transform:Find('Label'):GetComponent('MaskableGraphic'), CS.MergeTown.LanguageKeyDefine.k_220000002  ) --一键领取
+    CS.mpl.LuaUtils.SetLanguageId(self["Gnore"].transform:Find('Label'):GetComponent('MaskableGraphic'), CS.MergeTown.LanguageKeyDefine.k_220000003  )  --一键删除
+    CS.mpl.LuaUtils.SetLanguageId(self["Collect"].transform:Find('Label'):GetComponent('MaskableGraphic'), CS.MergeTown.LanguageKeyDefine.k_220000004  )  --领取
+    CS.mpl.LuaUtils.SetLanguageId(self["Collected"].transform:Find('Label'):GetComponent('MaskableGraphic'), CS.MergeTown.LanguageKeyDefine.k_220000005  )  --已经收集
+    CS.mpl.LuaUtils.SetLanguageId(self["Open"].transform:Find('Des'):GetComponent('MaskableGraphic'), CS.MergeTown.LanguageKeyDefine.k_220000008) --请选择一封邮件并打开它
+    --CS.mpl.LuaUtils.SetLanguageId(self["Collected"].transform:Find('Label'):GetComponent('MaskableGraphic'), CS.MergeTown.LanguageKeyDefine.k_220000017  )  --已经收集
+
+end
+print("start init UIMail--------------->4")
+function UIMail:Start()
+    UIMail.behaviour = self["cs_behaviour"]
+    --一键操作
+    CS.mpl.ClickEventUI.SetOnClick(self["Gnore"], function() self:DeleteAll() end)
+    CS.mpl.ClickEventUI.SetOnClick(self["Accept"], function() self:CollectAll() end)
+    --领取
+    CS.mpl.ClickEventUI.SetOnClick(self["Collect"], function() self:Receive() end)
+end
+
+function UIMail:MplOnOpen(...)
+    panel = self["Self"]
+    self:MplOnlanguageChange()
+
+    if self["cs_behaviour"]:GetMailCount() == 0 then
+        self["MailPanel"]:SetActive(false)
+        self["Content"]:SetActive(false)
+        self["Open"]:SetActive(false)
+        self["Null"]:SetActive(true)
+    else
+        self["MailPanel"]:SetActive(true)
+        self["Content"]:SetActive(false)
+        self["Open"]:SetActive(true)
+        self["Null"]:SetActive(false)
+        --self["cs_behaviour"].systemScroll:ScrollToCell(0)--默认定位到最上方
+        self["cs_behaviour"]:TrackToOne()
+    end
+end
+
+
+function UIMail:DeleteAll()  --一键删除
+    if self["cs_behaviour"]:GetMailCount() > 0 then
+        self["cs_behaviour"]: DeleteAll(curPage, function(issuccess) self:DeleteAllCallback(issuccess) end)
+    end
+
+    --self["cs_behaviour"]: DeleteAll(curPage,function(s) self:DeleteAllCallback(s) end)
+end
+
+function UIMail:DeleteAllCallback(issuccess)  --一键删除成功与否
+    if issuccess == true then
+        CS.mplExtension.AudioManager.PlaySound(CS.MergeTown.AudioDefine.Sfx_Tear_Paper);--TODO 邮件撕毁音效
+        if self["cs_behaviour"]:GetMailCount() == 0 then
+            self["MailPanel"]:SetActive(false)
+            self["Content"]:SetActive(false)
+            self["Open"]:SetActive(false)
+            self["Null"]:SetActive(true)
+        else
+            self["MailPanel"]:SetActive(true)
+            self["Content"]:SetActive(false)
+            self["Open"]:SetActive(true)
+            self["Null"]:SetActive(false)
+        end
+    end
+end
+
+function UIMail:CollectAll()  --一键收取
+    if self["cs_behaviour"]:haveReward() == false then
+        local str = CS.mpl.LuaUtils.GetContentByLanguageId(CS.MergeTown.LanguageKeyDefine.k_220000019) --您当前没有附件可以领取
+        CS.MergeTown.Toast.Show(str)
+    end
+    if self["cs_behaviour"]:canCollection() == true then
+        self["cs_behaviour"]: CollectAll(curPage, function(issuccess) self:CollectAllCallback(issuccess) end)
+    end
+end
+
+function UIMail:CollectAllCallback(issuccess)
+    if issuccess == true then
+        if mailTable ~= nil and mailTable.props.Count > 0 then
+            self["Collect"]:SetActive(false)
+            self["Collected"]:SetActive(true)
+
+        end
+        self["cs_behaviour"]:LoadRedPoint() --更新判断  发送红点消息
+    else
+
+    end
+end
+
+function UIMail:Receive()     --收取
+    self["cs_behaviour"]:Collect(mailID, function(s) self:ReceiveCallback(s) end)
+end
+
+function UIMail:ReceiveCallback(issuccess)  --收取成功与否
+    if issuccess == true then
+        if mailTable.props.Count > 0 then
+            for k,v in pairs(mailTable.props) do
+                CS.MergeTown.TotalUtils.ShowBubble(v.Id, v.Count)
+            end
+        end
+        self["Collect"]:SetActive(false)
+        self["Collected"]:SetActive(true)
+
+        mailTable.Mailstate = 2
+        self["cs_behaviour"].systemScroll:RefreshCells();
+    end
+end
+-------------------------------邮件更新内容
+
+function UIMail:Clear()  --还原初始形态
+    for k,v in pairs(slotList) do
+        CS.mpl.LuaUtils.destroy(v)
+    end
+end
+
+function UIMail:UpdateMail(t, mailInfo) --点击更新邮件内容
+    UIMail.behaviour:LoadRedPoint() --更新判断  发送红点消息
+    self:Clear()
+    if t ~= nil then
+        mailTable = t
+        mailID = t.Id
+        local content = panel.transform:Find('Background/Content')
+        panel.transform:Find('Background/Open').gameObject:SetActive(false)
+        content.gameObject:SetActive(true)
+        --CS.mpl.LuaUtils.SetLanguageId(content:Find('Description/Theme'):GetComponent("MaskableGraphic"), mailInfo.Name)  --邮件名字
+        local Extra = {
+            [1] = " ",
+            [2] = " ",
+            [3] = " ",
+            [4] = " ",
+        }
+        if t.param.Count > 0 then
+            ---[[
+            for k,v in pairs(t.param) do --额外信息   展示的名字
+                if v.k == "name" then
+                    Extra[1] = v.v or " "
+                elseif v.k == "count" then
+                    Extra[2] = v.v or " "
+                elseif v.k == "3" then
+                    Extra[3] = v.v or " "
+                elseif v.k == "4" then
+                    Extra[4] = v.v or " "
+                end
+            end
+            --]]
+        --elseif t.param.Count == 1 then
+         --   for k,v in pairs(t.param) do --额外信息   展示的名字
+         --       Extra[1] = v.v
+        --    end
+        end
+        --print(t.Type)
+        content:Find("Type1").gameObject:SetActive(false)
+        content:Find("Type2").gameObject:SetActive(true)
+        CS.mpl.LuaUtils.SetLanguageIdContent(content:Find('Type2/Des'):GetComponent("MaskableGraphic"), mailInfo.Content, Extra[1], Extra[2], Extra[3], Extra[4])  --邮件信息
+        local str = CS.mpl.LuaUtils.GetContentByLanguageId(CS.MergeTown.LanguageKeyDefine.k_220000018) --过期时间
+        content:Find('Time').gameObject:GetComponent('Text').text  =  str.."  "..CS.MergeTown.TimeFormatUtils.GetTimeStr3(t.EndTime) --CS.MergeTown.TimerManagerUtils.GetOverDue(t.EndTime) --  --时间
+        if t.props.Count > 0 then
+            local content2 = panel.transform:Find('Background/Content/Scroll View/Viewport/Content')
+            local obj = content2:Find('Item').gameObject
+            for k,v in pairs(t.props) do
+                local o = CS.mpl.LuaUtils.CreateUI(obj, content2)
+                table.insert(slotList, o)
+                local objTrans = o.transform
+                o:SetActive(true)
+                --print(objTrans:Find("Image").name..','.. v.Id)
+                --objTrans:Find('Image').gameObject:GetComponent('Image').sprite =
+                --CS.mpl.LuaUtils.SetUISpriteByName(objTrans:Find("Image"):GetComponent('Image'), "1", v.Id)
+                objTrans:Find('Count').gameObject:GetComponent('Text').text = 'x'..v.Count
+                CS.mpl.LuaUtils.SetUISprite( objTrans:Find('Image'):GetComponent('Image'),  v.Id) --报错  该 Id 的图片不存在
+            end
+            panel.transform:Find("Background/Content/Collect").gameObject:SetActive(true)
+            panel.transform:Find("Background/Content/Scroll View").gameObject:SetActive(true)
+        else
+            panel.transform:Find("Background/Content/Collect").gameObject:SetActive(false)
+            panel.transform:Find("Background/Content/Scroll View").gameObject:SetActive(false)
+        end
+        if t.Mailstate ~= 2 and t.props.Count > 0 then
+            panel.transform:Find("Background/Content/Collect").gameObject:SetActive(true)
+        else
+            panel.transform:Find("Background/Content/Collect").gameObject:SetActive(false)
+        end
+        if t.Mailstate == 2 then
+            panel.transform:Find("Background/Content/Collected").gameObject:SetActive(true)
+        else
+            panel.transform:Find("Background/Content/Collected").gameObject:SetActive(false)
+        end
+    end
+    
+end
+
+function UIMail:onClick(obj)
+	--print("选中的id"..self["cs_data"].Id)
+
+end
+
+print("start init UIMail--------------->99")
+-------------------------------------
+
+
+return UIMail

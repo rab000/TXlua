@@ -1,0 +1,6 @@
+print("lua_list.lua start")
+
+--return{
+--	"a",
+--	"b",
+--}

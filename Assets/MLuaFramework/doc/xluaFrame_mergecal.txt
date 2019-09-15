@@ -1,0 +1,51 @@
+mergecal xlua结构描述
+
+#-------------------------------------LuaMgr.cs
+
+#-------------------------------------LuaBehaviour.cs
+
+#-------------------------------------funcInvoke.lua
+
+#-------------------------------------LuaClass.lua
+
+#-------------------------------------UIMail.lua
+
+1 LuaMgr 获取了
+LuaEnv中的require方法，
+以及funcInvoke.lua中的FuncInvoke方法
+
+2 LuaBehaviour
+获取ui lua文件的原始表
+LuaTable luaClassTable = LuaMgr.Instance.Require(LuaPath);
+然后再通过
+luaTable = LuaMgr.Instance.FuncInvoke(luaClassTable, args) as LuaTable;
+获取到最终c#与lua建立关联的表
+然后通过OnTableInjection(); 把lua类中相关awake，update等方法引用取出到c#中
+在c#的awake，update中调用对应的lua的引用
+
+3 UIMail.lua是具体的ui lua文件
+通过这句获取了一个来自LuaClass的表(这个表被设置了元表 写了newindex，call方法)
+UIMail = LuaClass.Class(nil,"UIMail")
+
+4 LuaClass，funcInvoke 这两个lua的作用实际是建立c#与lua的相互关系
+LuaClass.Class会返回一个表(这里简称表1)，这个表设置了原表classTableMeta
+原表重写了newindex，call方法
+当UIMail.lua被require时，表1里已经通过newindex添加了UIMail.lua的全部函数
+(这里要注意，lua的函数定义也是按顺序执行的，比如在函数a前面输出表1的内容，发现是没有函数a的)
+
+5 LuaBehaviour中 LuaMgr.Instance.FuncInvoke(luaClassTable, args) as LuaTable;
+这里的luaClassTable就是表1，args是从c#类具体类中传入的"UIMail"(就是记录个名字，没实质作用)
+
+然后走funcinvoke的 func(table.unpack(argTable,1,count)) 
+这句实际是调用了LuaClass表classTableMeta.call
+function classTableMeta.__call(clsTable, ...)中clsTable实际就是classTableMeta本身
+后面的...才是funcinvoke传入的参数table.unpack(argTable,1,count)  （这个参数依旧是 “UIMail”标识用）
+
+执行classTableMeta.__call的作用只是又返回了一个null的 ，但是带有元表的表(这里简称表2)
+这个元表重写了 index和newindex，并且排除了一些关键字如 className，super等
+如果通过表2查询了表1的key，这里会通过index返回表1的key
+
+6 至此，c#与lua关系建立完成，可以通过LuaBehviour中OnTableInjection()建立后续回调
+
+
+

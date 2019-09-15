@@ -1,0 +1,8 @@
+print("test_hotfix start");
+
+--加上这句可以访问私有方法
+xlua.private_accessible(CS.NTHotfix.CSharpMono4Hotfix);  
+ 
+xlua.hotfix(CS.NTHotfix.CSharpMono4Hotfix, "Show", function(self)  
+    print("lua logic AAA");
+end)
