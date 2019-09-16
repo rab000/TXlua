@@ -1,0 +1,25 @@
+require("LuaClass")
+
+TestLuaUI = LuaClass.Class(nil,"TestLuaUI")
+
+TestLuaUI.behaviour = nil
+
+local this = TestLuaUI
+
+---@type UnityEngine.GameObject
+local go
+
+
+function TestLuaUI:Start()
+
+	print("TestLuaUI.lua--->Start")
+
+    TestLuaUI.behaviour = self["cs_behaviour"]
+
+	--button1.onClick:AddListener(function()
+	--	print("btn1 clicked ")
+	--end)
+
+end
+
+return TestLuaUI

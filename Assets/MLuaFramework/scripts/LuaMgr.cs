@@ -39,14 +39,20 @@ namespace mplExtension
             }
             return null;
         }
-        //~LuaMgr()
-        //{
-        //    if (luaEnv != null)
-        //    {
-        //        luaEnv.Dispose();
-        //        luaEnv = null;
-        //    }
-        //}
+        //nafio  这里写在析构而不写再OnDestroy中的原因
+        //写到OnDestroy中会报错try to dispose a LuaEnv with C# callback!”
+        //原因是此时c#还存在luaEnv的一些引用
+        //析构函数会在OnDestroy完毕后过一会执行
+        //同时unity中是不建议用析构的，在Awake前也会多次执行析构,所以这里要做非空判定
+        
+        ~LuaMgr()
+        {
+            if (luaEnv != null)
+            {
+                luaEnv.Dispose();
+                luaEnv = null;
+            }
+        }
         public void Update()
         {
             if (Time.time - _lastGCTime > GCInterval)
@@ -90,15 +96,9 @@ namespace mplExtension
 
         public void OnDestroy()
         {
-            Dispose();
-        }
-
-        public void Dispose()
-        {
             require = null;
             funcInvoke = null;
-            luaEnv.Dispose();
-            luaEnv = null;
         }
+       
     }
 }

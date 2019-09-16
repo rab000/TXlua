@@ -46,7 +46,7 @@
 //        }
 //        public override void MplOnOpen(object obj = null, params string[] param)
 //        {
-            
+
 //            if (obj != null)
 //            {
 //                initData((RGetMailList)obj);
@@ -116,7 +116,7 @@
 //                }
 //                return false;
 //            }
-            
+
 //        }
 //        public bool canCollection()
 //        {
@@ -141,7 +141,7 @@
 //            UIAnimatorCtrl aniCtrl = GetComponentInChildren<UIAnimatorCtrl>();
 //            if (aniCtrl != null)
 //            {
-//                aniCtrl.Close(()=>
+//                aniCtrl.Close(() =>
 //                {
 //                    MonoBehaviourUIMgr.Instance.Close(typeof(UIMail));
 //                });
@@ -151,7 +151,7 @@
 //                MonoBehaviourUIMgr.Instance.Close(typeof(UIMail));
 //            }
 //            AudioManager.PlaySound(AudioDefine.Sfx_ClosePopWindow);
-           
+
 //        }
 //        #endregion
 
@@ -164,7 +164,7 @@
 //        }
 //        //public bool IsNullFriend()
 //        //{
-//            //return friendData.TotalCount <= 0 ? true : false;
+//        //return friendData.TotalCount <= 0 ? true : false;
 //        //}
 //        public void Refresh()
 //        {
@@ -184,8 +184,8 @@
 //                     {
 //                         clearAll(type);
 //                         callback?.Invoke(true);
-//                     //MonoBehaviourUIMgr.Instance.Open(typeof(Toast), null, false, false, LanguageUtils.GetInfoById(LanguageKeyDefine.k_210000028));
-//                 }
+//                         //MonoBehaviourUIMgr.Instance.Open(typeof(Toast), null, false, false, LanguageUtils.GetInfoById(LanguageKeyDefine.k_210000028));
+//                     }
 //                     else
 //                     {
 //                         callback?.Invoke(false);
@@ -298,8 +298,8 @@
 //                    if (rObj != null && rObj.Code == WebSocketControl.SuccessCode)
 //                    {
 //                        obtionAll(type);
-//                    //MonoBehaviourUIMgr.Instance.Open(typeof(Toast), null, false, false, false, LanguageUtils.GetInfoById(LanguageKeyDefine.k_220000016));
-//                    callback?.Invoke(true);
+//                        //MonoBehaviourUIMgr.Instance.Open(typeof(Toast), null, false, false, false, LanguageUtils.GetInfoById(LanguageKeyDefine.k_220000016));
+//                        callback?.Invoke(true);
 //                    }
 //                    else
 //                    {
@@ -407,7 +407,7 @@
 //            //friendData.DataSouce.Sort(com);
 //            systemData.Bind(systemScroll);
 //            //friendData.Bind(friendScroll);
-            
+
 //        }
 
 
