@@ -49,3 +49,8 @@ function classTableMeta.__call(clsTable, ...)中clsTable实际就是classTableMe
 
 
 
+一些问题的说明
+
+baseLua作为基础类包含luaBehaviour
+那么上层类有哪些功能需要单独扩展，出了injectGo
+固定ui组件可以扩展，所以这层是有必要的
