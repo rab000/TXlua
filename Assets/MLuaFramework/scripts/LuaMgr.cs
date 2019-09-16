@@ -7,7 +7,7 @@ using XLua;
 
 namespace mplExtension
 {
-    public class LuaMgr : MonoBehaviour, IDisposable
+    public class LuaMgr : MonoBehaviour
     {
         private LuaEnv luaEnv;
         private Func<string, LuaTable> require;
@@ -100,5 +100,6 @@ namespace mplExtension
             funcInvoke = null;
         }
        
+
     }
 }
