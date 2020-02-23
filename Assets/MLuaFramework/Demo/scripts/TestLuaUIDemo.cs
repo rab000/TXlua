@@ -19,7 +19,7 @@ public class TestLuaUIDemo : MonoBehaviour
         {
             var go = GameObject.Instantiate(Resources.Load("TestLuaUI")) as GameObject;
 
-            go.transform.SetParent(CanvasTrm);
+            go.transform.SetParent(CanvasTrm,false);
             
         }
 
