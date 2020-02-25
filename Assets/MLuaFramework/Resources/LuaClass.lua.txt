@@ -79,6 +79,11 @@ function LuaClass.Class(nameSpace, className, super, staticVars)
 	function classTableMeta.__call(clsTable, ...)
 		print("LuaClass.function classTableMeta.__call")
 
+		--lua实现函数可以用
+		--classTableMeta.__call 参数中的第一个是自己的实例
+		--classTableMeta:__call 不需要带自身参数
+		--两者区别就是参数里是否需要带self，比如这里的clsTable就是classTableMeta自己，相当与this
+		
 		--这里是kv:1 vv:UIMail，说明clsTable是classTableMeta表本身，就是UIMail.lua本身
 		--for k, v in ipairs({...}) do 
 		--	print("kv:"..k.." vv:"..v)   
@@ -123,7 +128,8 @@ function LuaClass.Class(nameSpace, className, super, staticVars)
 		---@param key any
 		---@param value any
 		function instanceMeta.__newindex(table, key, value)
-		    print("LuaClass.function instanceMeta.__newindex:  table2 key:"..key)
+			--这里没走
+		    --print("LuaClass.function instanceMeta.__newindex:  table2 key:"..key)
 			if key == "nameSpace" or
 					key == "className" or
 					key == "super" or
@@ -140,15 +146,19 @@ function LuaClass.Class(nameSpace, className, super, staticVars)
 			local function create(ct, ...)
 			    print("LuaClass.function classTableMeta.__call  0000")
 				if ct.super then
+					--这里没走
 					print("LuaClass.function classTableMeta.__call  000 super")
 					create(ct.super,...);
 				end
 				print("LuaClass.function classTableMeta.__call  2222")
 				if ct.ctor then
+					--这里没走
 					print("LuaClass.function classTableMeta.__call  222 ctor")
 					ct.ctor(instance,...);
 				end
 			end
+			
+			--NINFO 这里调用了前面的create函数
 			create(clsTable,...);
 		end
 

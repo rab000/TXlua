@@ -99,11 +99,12 @@ namespace NXLua
             }
             else
             {
-                //NTODO 这里如果从bundle加载，要做异步回调处理
+                //这里的后续修改直接用File.read从沙盒同步加载就可以，不需要多余改动
                 Debug.LogError("加载路径--->"+ LuaRelePath);
                 TextAsset textAsset = Resources.Load<TextAsset>(LuaRelePath+".lua");
                 Debug.LogError("加载到的txt--->" + textAsset.text);
                 //先加载lua txt 然后再导入后续string,这里加载需要时间，是个异步操作
+                
                 //加载一个代码块，但不执行，只返回类型可以指定为一个delegate或者一个LuaFunction
                 //第3个参数时这个代码块的环境变量
                 luaFunc = TLuaMgr._LuaEnv.LoadString(textAsset.text, "TLuaBehaviour", scriptEnvTable);

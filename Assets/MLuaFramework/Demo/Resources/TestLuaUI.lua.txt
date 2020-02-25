@@ -1,5 +1,5 @@
 require("LuaClass")
-
+--NINFO 这里通过LuaClass.Class返回一个表
 TestLuaUI = LuaClass.Class(nil,"TestLuaUI")
 
 TestLuaUI.behaviour = nil

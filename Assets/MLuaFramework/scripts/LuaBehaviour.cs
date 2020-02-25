@@ -76,7 +76,17 @@ namespace mplExtension
                 Debug.LogError("处理原始表 luaPath:" + LuaPath+" 完毕");
                 if (luaClassTable != null)
                 {
-
+                    //看懂下面这句需要看两部分
+                    //1 funcInvoke的意思，这个在funcInvoke.lua.txt中
+                    //2 LuaClass.__call,funcInvoke的最后，将参数args转换成多个单独的参数，然后直接luaClassTable（p1,p2,p3）
+                    //  这个函数调用是通过luaClass.__call实现的
+                    
+                    //得到的luaTable是什么呢，看luaClass.__call得知
+                    //这个luaTable只是对luaClassTable做了一层包裹，有点坑，传入的args只是接收了，但是没做任何处理
+                    //1 通过luaTable.__index可以访问到luaClassTable
+                    //2 luaTable中加入了一些__index参数，实际也没用到
+                    
+                    //这个表luaTable和luaClassTable作用其实是一样的，就是csharp拿到了lua的引用，可以调用lua函数了
                     luaTable = LuaMgr.Ins.FuncInvoke(luaClassTable, args) as LuaTable;
 
                     if (luaTable != null)

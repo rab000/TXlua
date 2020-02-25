@@ -14,7 +14,9 @@ namespace mplExtension
             luaBehaviour = Get<LuaBehaviour>(gameObject);
             luaBehaviour.SetLuaPath(GetLuaPath());
             luaBehaviour.SetInjection(RegistObj());
+            //下面这句拿到具体lua代码段，然后cs就可以调用lua相关的awake，start了
             luaBehaviour.InitLua(AfterAwakeInitLua());
+            //下面这句是把monobehaviour赋值到上面获取到的lua代码段表中，这样lua就能方便调用当前这个monobehaviour(luaBase所在的monobehaviour)了
             luaBehaviour.SetThis(GetThis());
         }
 

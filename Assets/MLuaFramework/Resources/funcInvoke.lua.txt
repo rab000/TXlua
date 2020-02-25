@@ -1,5 +1,13 @@
-﻿local function FuncInvoke(func,args)
+﻿--NINFO 说说这个函数有什么用
+--两个参数
+--func 这里实际传入的是lua代码段(比如require后的TestLuaUI.lua.txt)，或者说是这个代码段的表
+--args 这里是c#传入的数组 index从0开始的
+--这段代码作用是对args做了下转换，从index从0开始的数组，转化成了一个表
+--然后直接丢给func调用，func是个表，表实现了__call就可以被调用
+--综上，这段代码实际是起了args参数转换的作用
+local function FuncInvoke(func,args)
     if func then
+        --args就是TestLuaUI.cs-->AfterAwakeInitLua()里返回的值
         local count=args and args.Length or 0
         local argTable={}
         for index=1,count do
