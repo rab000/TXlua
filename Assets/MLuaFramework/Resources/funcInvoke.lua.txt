@@ -14,7 +14,9 @@
 		--print("unpack result:"..type(tt))   类型string
 		--print(tt)
 		--print("test end")
-		
+
+		--unpack它接受一个数组(table)作为参数,并默认从下标1开始返回数组的所有元素
+		--执行demo这里ss就是TestLuaUI.cs-->AfterAwakeInitLua()里返回的值
 		local ss = table.unpack(argTable,1,count)
 		print("funcInvoke.unpack--->"..ss.." type:"..type(ss))
         return func(ss)

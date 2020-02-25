@@ -10,6 +10,8 @@ namespace mplExtension
     public class LuaMgr : MonoBehaviour
     {
         private LuaEnv luaEnv;
+        //NINFO Func最后一个参数是返回类型，别混了
+        //这个委托用来绑定lua的require方法返回代码段的LuaTable
         private Func<string, LuaTable> require;
         private Func<object, object[], object> funcInvoke;
         private float _lastGCTime = 0;

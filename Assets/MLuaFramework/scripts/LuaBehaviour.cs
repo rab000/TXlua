@@ -70,11 +70,15 @@ namespace mplExtension
             if (!string.IsNullOrEmpty(LuaPath))
             {
                 Debug.LogError("开始处理原始表 luaPath:"+ LuaPath);
+
+                //这个就是替代mono ui的lua代码段，在demo里就是TestLuaUI.lua.txt
                 LuaTable luaClassTable = LuaMgr.Ins.Require(LuaPath);
                 Debug.LogError("处理原始表 luaPath:" + LuaPath+" 完毕");
                 if (luaClassTable != null)
                 {
+
                     luaTable = LuaMgr.Ins.FuncInvoke(luaClassTable, args) as LuaTable;
+
                     if (luaTable != null)
                     {
                         OnTableInjection();
