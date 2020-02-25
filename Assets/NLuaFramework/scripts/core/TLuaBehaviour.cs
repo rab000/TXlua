@@ -126,7 +126,6 @@ namespace NXLua
 
         }
 
-        // Use this for initialization
         public void Start()
         {
 
@@ -145,8 +144,7 @@ namespace NXLua
                 luaStart();
             }
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
             if (!BeLoadLuaStr)
