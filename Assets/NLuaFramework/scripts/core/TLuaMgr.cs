@@ -56,13 +56,22 @@ namespace NXLua {
 
         }
 
-        void OnDestroy()
+        //void OnDestroy()
+        //{
+        //    require = null;
+        //    _LuaEnv.Dispose();
+        //    _LuaEnv = null;
+        //}
+
+        ~TLuaMgr()
         {
-            require = null;
-            _LuaEnv.Dispose();
-            _LuaEnv = null;
+            if (_LuaEnv != null)
+            {
+                _LuaEnv.Dispose();
+                _LuaEnv = null;
+            }
         }
-		
+
         void Update()
         {
             if (Time.time - TLuaMgr.lastGCTime > GCInterval)
