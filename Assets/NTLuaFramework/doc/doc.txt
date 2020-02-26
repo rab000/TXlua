@@ -12,3 +12,7 @@ m构架的优点说明，
 2 当调用NTLuaMgr.GetIns().Require(LuaFileName);时
 lua会在两个位置进行查找，一个时默认的Resources，另一个是自定义的loader位置
 所以目前lua要么本地在Resources中，要么就在loader定义的位置，暂时不支持文件夹，只能放到指定的根目录
+Resources下放lua可以直接加目录引用的，可以看下NluaFramework中hotfix_list.lua的处理
+
+
+3 main.lua还在NluaFramework中
