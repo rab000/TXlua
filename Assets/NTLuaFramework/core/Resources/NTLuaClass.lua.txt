@@ -1,0 +1,233 @@
+NTLuaClass = {};
+
+function NTLuaClass.Class(nameSpace, className, super, staticVars)
+	if not className then
+		error("ClassName is nil!");
+		return nil;
+	end
+	if super and not super.isClass then
+		error("Super is not a NTLuaClass!");
+		return nil;
+	end
+
+	local classTable = staticVars or {};
+	local classTableMeta = {};
+	setmetatable(classTable, classTableMeta);
+
+	function classTableMeta.__index(table, key)
+		if key == "nameSpace" then
+			return nameSpace;
+		elseif key == "className" then
+			return className;
+		elseif key == "super" then
+			return super;
+		elseif key == "class" then
+			return table;
+		elseif key == "isClass" then
+			return true;
+		end
+
+		if super then
+
+			if key == "ctor" then
+				return nil;
+			end
+			return super[key];
+		end
+		return nil;
+	end
+
+	function classTableMeta.__newindex(table, key, value)
+
+		if key == "nameSpace" or
+				key == "className" or
+				key == "super" or
+				key == "class" or
+				key == "isClass" then
+			error("Attempt to set a read only value ('" .. key .."')")
+			return;
+		end
+		rawset(table, key, value)
+	end
+
+
+	function classTableMeta.__call(clsTable, ...)
+		
+		local instance = {};
+		local instanceMeta = {};
+		setmetatable(instance, instanceMeta);
+
+		function instanceMeta.__index(table, key)
+			if key == "nameSpace" or key == "className" then
+				return clsTable and clsTable[key] or nil;
+			elseif key == "super" then
+				return nil;
+			elseif key == "class" then
+				return clsTable;
+			elseif key == "isClass" then
+				return false;
+			elseif key == "ctor" then
+				return nil;
+			end
+			return clsTable and clsTable[key];
+		end
+
+		
+		function instanceMeta.__newindex(table, key, value)
+			
+			if key == "nameSpace" or
+					key == "className" or
+					key == "super" or
+					key == "class" or
+					key == "isClass" or
+					key == "ctor" then
+				error("Attempt to set a read only value ('" .. key .."')")
+				return;
+			end
+			rawset(table, key, value)
+		end
+
+		do
+			local function create(ct, ...)
+			   
+				if ct.super then
+					create(ct.super,...);
+				end
+				if ct.ctor then
+					ct.ctor(instance,...);
+				end
+			end
+			
+			create(clsTable,...);
+		end
+
+		return instance;
+	end
+
+	return classTable;
+end
+
+
+function NTLuaClass.SetProperty(classOrInstance, propertyHandles, propertyValues)
+	
+	if classOrInstance then
+		propertyHandles = propertyHandles or {};
+		propertyValues = propertyValues or {};
+
+		local instanceMeta = getmetatable(classOrInstance);
+		if not instanceMeta then
+			instanceMeta = {};
+			setmetatable(classOrInstance, instanceMeta);
+		end
+
+		local __index = instanceMeta.__index;
+		if type(__index) == "table" then
+			local __indexTable = __index;
+			__index = function(t, k) return __indexTable[k]; end;
+		end
+
+		local __newindex = instanceMeta.__newindex;
+		if type(__newindex) == "table" then
+			local __newIndexTable = __newindex;
+			__newindex = function(t, k, v) __newIndexTable[k] = v; end;
+		end
+
+		 function instanceMeta.__index(t, k)
+			local property = propertyHandles[k];
+			if property then
+				return property.Get and property.Get(propertyValues);
+			end
+			return __index and __index(t, k);
+		end
+
+		function instanceMeta.__newindex(t, k, v)
+			local property = propertyHandles[k];
+			if property then
+				if property then
+					property.Set(propertyValues, v);
+				end
+				return;
+			end
+			if __newindex then
+				__newindex(t, k, v);
+			end
+			rawset(t, k, v);		end
+	end
+end
+
+
+function NTLuaClass.IsClass(class)
+	return type(class.name) == "string" and NTLuaClass[class.name] == class;
+end
+
+
+function NTLuaClass.Typeof(class)
+	if not class then
+		return nil;
+	end
+	if class.isClass then
+		return LuaClass.Type(class);
+	end
+	return typeof(class);
+end
+
+
+function NTLuaClass.IsClass(instance, class)
+	if not instance or not class or not class.isClass then
+		return false;
+	end
+	local tempClass = instance.class;
+	while tempClass do
+		if tempClass == class then
+			return true;
+		end
+		tempClass = tempClass.super;
+	end
+	return false;
+end
+
+
+local Type = NTLuaClass.Class(nil, "Type");
+NTLuaClass.Type = Type;
+
+
+function Type.ctor(instance, targetClass)
+
+	instance.targetClass = targetClass;
+
+	local function typeEquals(type1, type2)
+		return type1.targetClass == type2.targetClass;
+	end;
+	getmetatable(instance).__eq = typeEquals;
+
+
+	local function Get(propertyValues)
+		return "NTLuaClass." .. targetClass.nameSpace .. "." .. targetClass.className;
+	end
+
+	local propertyHandles = {
+
+		Name = {
+			Get = Get;
+		};
+	};
+	local propertyValues = {};
+	NTLuaClass.SetProperty(instance, propertyHandles, propertyValues)
+end
+
+return NTLuaClass;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

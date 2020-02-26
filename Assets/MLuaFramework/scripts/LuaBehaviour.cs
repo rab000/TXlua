@@ -190,6 +190,7 @@ namespace mplExtension
 
             updateSelectedView = luaTable.Get<Action<LuaTable, bool>>("MplUpdateSelectedView");
 
+            //NINFO 使用这些listener的作用是当lua中有这些需求时才动态挂载这些功能，如果直接挂载上空跑很浪费性能
             AddUpdateListener();
             AddFixedUpdateListener();
             AddLateUpdateListener();

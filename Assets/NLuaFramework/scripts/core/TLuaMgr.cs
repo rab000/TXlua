@@ -93,7 +93,8 @@ namespace NXLua {
 
         private byte[] MyLoader(ref string filePath)
         {
-			string path = Application.persistentDataPath + "/" + filePath + ".lua.txt";
+            //Debug.LogError("---------->filePath:" + filePath);
+            string path = Application.persistentDataPath + "/" + filePath + ".lua.txt";
             //Debug.LogError("---------->path:"+path);
             //path:C:/Users/1/AppData/LocalLow/DefaultCompany/TXlua/main.lua.txt
             if (!File.Exists(path))

@@ -1338,6 +1338,9 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(TestLua), TestLuaWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(NTLuaDemo), NTLuaDemoWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(ExampleGenConfig), ExampleGenConfigWrap.__Register);
         
         
@@ -1357,6 +1360,33 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(Tutorial.Param1), TutorialParam1Wrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.NTApplicationListener), NTXluaNTApplicationListenerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.NTEnabledListener), NTXluaNTEnabledListenerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.NTFixedUpdateListener), NTXluaNTFixedUpdateListenerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.NTLateUpdateListener), NTXluaNTLateUpdateListenerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.NTPhysicsListener), NTXluaNTPhysicsListenerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.NTUpdateListener), NTXluaNTUpdateListenerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.Injection), NTXluaInjectionWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.NTLuaBehaviour), NTXluaNTLuaBehaviourWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NTXlua.NTLuaMgr), NTXluaNTLuaMgrWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(NXLua.Injection), NXLuaInjectionWrap.__Register);
@@ -1400,6 +1430,10 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(mplExtension.LuaMgr), mplExtensionLuaMgrWrap.__Register);
         
+        }
+        
+        static void wrapInit9(LuaEnv luaenv, ObjectTranslator translator)
+        {
         
             translator.DelayWrapLoader(typeof(Tutorial.CSCallLua.DClass), TutorialCSCallLuaDClassWrap.__Register);
         
@@ -1427,6 +1461,8 @@ namespace XLua.CSObjectWrap
             wrapInit7(luaenv, translator);
             
             wrapInit8(luaenv, translator);
+            
+            wrapInit9(luaenv, translator);
             
             
             translator.AddInterfaceBridgeCreator(typeof(System.Collections.IEnumerator), SystemCollectionsIEnumeratorBridge.__Create);

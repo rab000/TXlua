@@ -1,0 +1,17 @@
+﻿
+local function NTFuncInvoke(func,args)
+    if func then
+
+        local count=args and args.Length or 0
+        local argTable={}
+        for index=1,count do
+            argTable[index]=args[index-1]
+			print("argTable:",argTable[index])
+        end
+
+        return func(ss)
+    end
+    return nil
+end
+
+return {NTFuncInvoke=NTFuncInvoke}

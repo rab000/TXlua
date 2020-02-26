@@ -260,6 +260,7 @@
 		<type fullname="UIDemo" preserve="all"/>
 		<type fullname="HotfixDemo" preserve="all"/>
 		<type fullname="TestLua" preserve="all"/>
+		<type fullname="NTLuaDemo" preserve="all"/>
 		<type fullname="ExampleGenConfig" preserve="all"/>
 		<type fullname="LuaCallCs" preserve="all"/>
 		<type fullname="Tutorial.CSCallLua" preserve="all"/>
@@ -267,6 +268,15 @@
 		<type fullname="Tutorial.ByString" preserve="all"/>
 		<type fullname="Tutorial.CustomLoader" preserve="all"/>
 		<type fullname="Tutorial.Param1" preserve="all"/>
+		<type fullname="NTXlua.NTApplicationListener" preserve="all"/>
+		<type fullname="NTXlua.NTEnabledListener" preserve="all"/>
+		<type fullname="NTXlua.NTFixedUpdateListener" preserve="all"/>
+		<type fullname="NTXlua.NTLateUpdateListener" preserve="all"/>
+		<type fullname="NTXlua.NTPhysicsListener" preserve="all"/>
+		<type fullname="NTXlua.NTUpdateListener" preserve="all"/>
+		<type fullname="NTXlua.Injection" preserve="all"/>
+		<type fullname="NTXlua.NTLuaBehaviour" preserve="all"/>
+		<type fullname="NTXlua.NTLuaMgr" preserve="all"/>
 		<type fullname="NXLua.Injection" preserve="all"/>
 		<type fullname="NXLua.TLuaMgr" preserve="all"/>
 		<type fullname="NTHotfix.CSharpMono4Hotfix" preserve="all"/>
