@@ -1383,6 +1383,12 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(mplExtension.LateUpdateListener), mplExtensionLateUpdateListenerWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(mplExtension.PhysicsListener), mplExtensionPhysicsListenerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(mplExtension.UpdateListener), mplExtensionUpdateListenerWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(mplExtension.LuaBase), mplExtensionLuaBaseWrap.__Register);
         
         
@@ -1393,12 +1399,6 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(mplExtension.LuaMgr), mplExtensionLuaMgrWrap.__Register);
-        
-        
-            translator.DelayWrapLoader(typeof(mplExtension.PhysicsListener), mplExtensionPhysicsListenerWrap.__Register);
-        
-        
-            translator.DelayWrapLoader(typeof(mplExtension.UpdateListener), mplExtensionUpdateListenerWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(Tutorial.CSCallLua.DClass), TutorialCSCallLuaDClassWrap.__Register);

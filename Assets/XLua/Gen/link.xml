@@ -275,12 +275,12 @@
 		<type fullname="mplExtension.FixedUpdateListener" preserve="all"/>
 		<type fullname="mplExtension.GUIListener" preserve="all"/>
 		<type fullname="mplExtension.LateUpdateListener" preserve="all"/>
+		<type fullname="mplExtension.PhysicsListener" preserve="all"/>
+		<type fullname="mplExtension.UpdateListener" preserve="all"/>
 		<type fullname="mplExtension.LuaBase" preserve="all"/>
 		<type fullname="mplExtension.Injection" preserve="all"/>
 		<type fullname="mplExtension.LuaBehaviour" preserve="all"/>
 		<type fullname="mplExtension.LuaMgr" preserve="all"/>
-		<type fullname="mplExtension.PhysicsListener" preserve="all"/>
-		<type fullname="mplExtension.UpdateListener" preserve="all"/>
 		<type fullname="Tutorial.CSCallLua+DClass" preserve="all"/>
 		
 	</assembly>
