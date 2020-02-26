@@ -15,4 +15,4 @@ lua会在两个位置进行查找，一个时默认的Resources，另一个是�
 Resources下放lua可以直接加目录引用的，可以看下NluaFramework中hotfix_list.lua的处理
 
 
-3 main.lua还在NluaFramework中
+3 main.lua等还在NluaFramework中，没改名没迁移出来
