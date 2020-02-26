@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using XLua;
 using System.IO;
 using System;
@@ -39,8 +37,11 @@ namespace NXLua {
 
             _LuaEnv = new LuaEnv();
 
-            //_LuaEnv.AddLoader(MyLoader);
+            
             //注意这里可以写相对路径，一旦自己设置了自定义的loader后，貌似Resource中的main就找不到
+            //这里比较奇怪，因为m构架里是能找到的
+            //问题解决实际是能找到的，因为在自定义loader中打了error log而误以为找不到
+            _LuaEnv.AddLoader(MyLoader);
             //_LuaEnv.DoString("require 'test/main'");
 
             require = _LuaEnv.Global.Get<Func<string, LuaTable>>("require");
@@ -53,7 +54,15 @@ namespace NXLua {
             //当c#有了Require方法后，初始调用main.lua其实是可有可无的
             //先从本地Resources中读，上面注掉的是从沙盒读
             _LuaEnv.DoString("require 'main'");
-
+            
+            
+            //Debug.LogError("准备call main.lua");
+            //TextAsset textAsset = Resources.Load<TextAsset>("main.lua");
+            //LuaFunction luaFunc = _LuaEnv.LoadString(textAsset.text);
+            //luaFunc.Call();
+            //Debug.LogError("main.lua内容----"+textAsset.text);
+            //_LuaEnv.DoString(textAsset.text);
+            
         }
 
         //void OnDestroy()
@@ -89,7 +98,8 @@ namespace NXLua {
             //path:C:/Users/1/AppData/LocalLow/DefaultCompany/TXlua/main.lua.txt
             if (!File.Exists(path))
             {
-                Debug.LogError("TLuaMgr.MyLoader lua not exist path:" + path);
+                //这句没必要设置成error
+                Debug.Log("警告TLuaMgr.MyLoader lua not exist path:" + path);
                 return null;
             }
             else

@@ -2,14 +2,14 @@ print("main.lua start")
 
 local luatool = require("luatools");
 
---¼ÓÔØlua£¬ÒòÎªÀïÃæÃ»ÓĞ¶ÔÓ¦µÄluaÎÄ¼ş£¬ËùÒÔÏÈ×¢ÊÍµô£¬·ñÔò¼ÓÔØ²»µ½»á±¨´í
---ÕâÀï¼ÓÔØµÄÊÇ²»°ó¶¨µ½uiÉÏµÄlua£¬°ó¶¨µ½uiÉÏµÄluaÓÉluaMono¼ÓÔØ£¬ÒòÎªÀïÃæĞèÒªlua»·¾³
+--åŠ è½½luaï¼Œå› ä¸ºé‡Œé¢æ²¡æœ‰å¯¹åº”çš„luaæ–‡ä»¶ï¼Œæ‰€ä»¥å…ˆæ³¨é‡Šæ‰ï¼Œå¦åˆ™åŠ è½½ä¸åˆ°ä¼šæŠ¥é”™
+--è¿™é‡ŒåŠ è½½çš„æ˜¯ä¸ç»‘å®šåˆ°uiä¸Šçš„luaï¼Œç»‘å®šåˆ°uiä¸Šçš„luaç”±luaMonoåŠ è½½ï¼Œå› ä¸ºé‡Œé¢éœ€è¦luaç¯å¢ƒ
 --local luaList = require("lua_list");
 --for _,filename in ipairs(luaList) do
 --	require(filename);
 --end 
 
---¼ÓÔØÈÈĞŞ¸´
+--åŠ è½½çƒ­ä¿®å¤
 local hotfixList = require("hotfix_list");
 for _,filename in ipairs(hotfixList) do
 	require(filename);
