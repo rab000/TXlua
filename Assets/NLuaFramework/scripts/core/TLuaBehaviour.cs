@@ -119,7 +119,8 @@ namespace NXLua
         {
             BeLoadLuaStr = true;
 
-            //?这里和awake中重复了貌似
+            //?这里和awake中重复了貌似，就是重复了，保留这里，学习用，如果用到项目里这里要删除
+
             //这里xlua的解释相当于lua的setfenv函数
             //setfenv的解释https://www.cnblogs.com/sifenkesi/p/3843348.html
             //猜测这句的意思就是为了避免luaFunc这段代码里面一些变量跟lua全局变量同名
