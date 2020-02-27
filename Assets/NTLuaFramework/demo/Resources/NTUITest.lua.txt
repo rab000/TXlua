@@ -1,0 +1,17 @@
+require("NTLuaClass")
+
+NTUITest = NTLuaClass.Class(nil,"NTUITest")
+
+NTUITest.behaviour = nil
+
+local this = NTUITest
+
+function NTUITest:Start()
+
+	print("NTUITest.lua--->Start Resources")
+
+    NTUITest.behaviour = self["cs_behaviour"]
+	
+end
+
+return NTUITest

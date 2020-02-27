@@ -66,7 +66,7 @@ namespace NTXlua
 
         }
 
-        //增加自定义读取位置的loader
+        //增加自定义读取位置的loader，如果在这个位置找不到，lua也会在其他位置进行查找，比如Resources中
         private byte[] CustomLoader(ref string fileName)
         {
             string filePath = LuaPersistPath + fileName + ".lua.txt";
