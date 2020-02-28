@@ -23,6 +23,12 @@ required会重复加载，避免重复加载的方法如下
 package.loaded[‘test.lua’] = nil
 required(‘test.lua’)
 
+xlua接外部库，主要是proto
+https://www.jianshu.com/p/d997e1f5e2ed
+https://www.cnblogs.com/xiaohutu/p/12168781.html
+xlua继承的lua库
+https://github.com/chexiongsheng/build_xlua_with_libs
+
 关于缓存c#调用lua函数的例子
 https://www.e-learn.cn/content/qita/788501
 
@@ -58,8 +64,6 @@ https://blog.csdn.net/ChinarCSDN/article/details/81124973
 
 热修复热更流程
 https://blog.csdn.net/liaoshengg/article/details/81562633
-
-
 
 
 基于xlua和mvvm的unity框架 ,xuui,混合了xlua和mvvm,比较重要
