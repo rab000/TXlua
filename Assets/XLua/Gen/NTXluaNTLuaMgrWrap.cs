@@ -42,7 +42,7 @@ namespace XLua.CSObjectWrap
             
 			
             
-			Utils.RegisterFunc(L, Utils.CLS_GETTER_IDX, "LuaPath", _g_get_LuaPath);
+			Utils.RegisterFunc(L, Utils.CLS_GETTER_IDX, "LuaPersistPath", _g_get_LuaPersistPath);
             
 			
 			
@@ -277,7 +277,7 @@ namespace XLua.CSObjectWrap
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _g_get_LuaPath(RealStatePtr L)
+        static int _g_get_LuaPersistPath(RealStatePtr L)
         {
 		    try {
             

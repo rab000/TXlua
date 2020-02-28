@@ -14,150 +14,150 @@ using System.Collections.Generic;
 
 namespace Tutorial
 {
-	[LuaCallCSharp]
-	public class BaseClass
-	{
-		public static void BSFunc()
-		{
-			Debug.Log("Derived Static Func, BSF = " + BSF);
-		}
+    [LuaCallCSharp]
+    public class BaseClass
+    {
+        public static void BSFunc()
+        {
+            Debug.Log("Derived Static Func, BSF = " + BSF);
+        }
 
-		public static int BSF = 1;
+        public static int BSF = 1;
 
-		public void BMFunc()
-		{
-			Debug.Log("Derived Member Func, BMF = " + BMF);
-		}
+        public void BMFunc()
+        {
+            Debug.Log("Derived Member Func, BMF = " + BMF);
+        }
 
-		public int BMF { get; set; }
-	}
+        public int BMF { get; set; }
+    }
 
-	public struct Param1
-	{
-		public int x;
-		public string y;
-	}
+    public struct Param1
+    {
+        public int x;
+        public string y;
+    }
 
-	[LuaCallCSharp]
-	public enum TestEnum
-	{
-		E1,
-		E2
-	}
+    [LuaCallCSharp]
+    public enum TestEnum
+    {
+        E1,
+        E2
+    }
 
+    [LuaCallCSharp]
+    public class DerivedClass : BaseClass
+    {
+        [LuaCallCSharp]
+        public enum TestEnumInner
+        {
+            E3,
+            E4
+        }
 
-	[LuaCallCSharp]
-	public class DerivedClass : BaseClass
-	{
-		[LuaCallCSharp]
-		public enum TestEnumInner
-		{
-			E3,
-			E4
-		}
+        public void DMFunc()
+        {
+            Debug.Log("Derived Member Func, DMF = " + DMF);
+        }
 
-		public void DMFunc()
-		{
-			Debug.Log("Derived Member Func, DMF = " + DMF);
-		}
+        public int DMF { get; set; }
 
-		public int DMF { get; set; }
+        public double ComplexFunc(Param1 p1, ref int p2, out string p3, Action luafunc, out Action csfunc)
+        {
+            Debug.Log("P1 = {x=" + p1.x + ",y=" + p1.y + "},p2 = " + p2);
+            luafunc();
+            p2 = p2 * p1.x;
+            p3 = "hello " + p1.y;
+            csfunc = () =>
+            {
+                Debug.Log("csharp callback invoked!");
+            };
+            return 1.23;
+        }
 
-		public double ComplexFunc(Param1 p1, ref int p2, out string p3, Action luafunc, out Action csfunc)
-		{
-			Debug.Log("P1 = {x=" + p1.x + ",y=" + p1.y + "},p2 = " + p2);
-			luafunc();
-			p2 = p2 * p1.x;
-			p3 = "hello " + p1.y;
-			csfunc = () =>
-			{
-				Debug.Log("csharp callback invoked!");
-			};
-			return 1.23;
-		}
+        public void TestFunc(int i)
+        {
+            Debug.Log("TestFunc(int i)");
+        }
 
-		public void TestFunc(int i)
-		{
-			Debug.Log("TestFunc(int i)");
-		}
+        public void TestFunc(string i)
+        {
+            Debug.Log("TestFunc(string i)");
+        }
 
-		public void TestFunc(string i)
-		{
-			Debug.Log("TestFunc(string i)");
-		}
-
-		public static DerivedClass operator +(DerivedClass a, DerivedClass b)
-		{
+        public static DerivedClass operator +(DerivedClass a, DerivedClass b)
+        {
             DerivedClass ret = new DerivedClass();
-			ret.DMF = a.DMF + b.DMF;
-			return ret;
-		}
+            ret.DMF = a.DMF + b.DMF;
+            return ret;
+        }
 
-		public void DefaultValueFunc(int a = 100, string b = "cccc", string c = null)
-		{
-			UnityEngine.Debug.Log("DefaultValueFunc: a=" + a + ",b=" + b + ",c=" + c);
-		}
+        public void DefaultValueFunc(int a = 100, string b = "cccc", string c = null)
+        {
+            UnityEngine.Debug.Log("DefaultValueFunc: a=" + a + ",b=" + b + ",c=" + c);
+        }
 
-		public void VariableParamsFunc(int a, params string[] strs)
-		{
-			UnityEngine.Debug.Log("VariableParamsFunc: a =" + a);
-			foreach (var str in strs)
-			{
-				UnityEngine.Debug.Log("str:" + str);
-			}
-		}
+        public void VariableParamsFunc(int a, params string[] strs)
+        {
+            UnityEngine.Debug.Log("VariableParamsFunc: a =" + a);
+            foreach (var str in strs)
+            {
+                UnityEngine.Debug.Log("str:" + str);
+            }
+        }
 
-		public TestEnum EnumTestFunc(TestEnum e)
-		{
-			Debug.Log("EnumTestFunc: e=" + e);
-			return TestEnum.E2;
-		}
+        public TestEnum EnumTestFunc(TestEnum e)
+        {
+            Debug.Log("EnumTestFunc: e=" + e);
+            return TestEnum.E2;
+        }
 
-		public Action<string> TestDelegate = (param) =>
-		{
-			Debug.Log("TestDelegate in c#:" + param);
-		};
+        public Action<string> TestDelegate = (param) =>
+        {
+            Debug.Log("TestDelegate in c#:" + param);
+        };
 
-		public event Action TestEvent;
+        public event Action TestEvent;
 
-		public void CallEvent()
-		{
-			TestEvent();
-		}
+        public void CallEvent()
+        {
+            TestEvent();
+        }
 
-		public ulong TestLong(long n)
-		{
-			return (ulong)(n + 1);
-		}
+        public ulong TestLong(long n)
+        {
+            return (ulong)(n + 1);
+        }
 
-		class InnerCalc : ICalc
-		{
-			public int add(int a, int b)
-			{
-				return a + b;
-			}
+        public ICalc GetCalc()
+        {
+            return new InnerCalc();
+        }
 
-			public int id = 100;
-		}
+        public void GenericMethod<T>()
+        {
+            Debug.Log("GenericMethod<" + typeof(T) + ">");
+        }
+    }
 
-		public ICalc GetCalc()
-		{
-			return new InnerCalc();
-		}
+    //NINFO 这个类原来是在DerivedClass内的，放里面后脚本不能挂载，所以提了出来
+    class InnerCalc : ICalc
+    {
+        public int add(int a, int b)
+        {
+            return a + b;
+        }
 
-		public void GenericMethod<T>()
-		{
-			Debug.Log("GenericMethod<" + typeof(T) + ">");
-		}
-	}
+        public int id = 100;
+    }
 
-	[LuaCallCSharp]
-	public interface ICalc
-	{
-		int add(int a, int b);
-	}
+    [LuaCallCSharp]
+    public interface ICalc
+    {
+        int add(int a, int b);
+    }
 
-	[LuaCallCSharp]
+    [LuaCallCSharp]
 	public static class DerivedClassExtensions
     {
 		public static int GetSomeData(this DerivedClass obj)
@@ -189,14 +189,17 @@ public class LuaCallCs : MonoBehaviour
             local newGameObj2 = CS.UnityEngine.GameObject('helloworld')
             print(newGameObj, newGameObj2)
         
+            --NINFO注意这里使用类先要引入类类型
             --访问静态属性，方法
             local GameObject = CS.UnityEngine.GameObject
             print('UnityEngine.Time.deltaTime:', CS.UnityEngine.Time.deltaTime) --读静态属性
             CS.UnityEngine.Time.timeScale = 0.5 --写静态属性
             print('helloworld', GameObject.Find('helloworld')) --静态方法调用
 
+            --NINFO注意这里使用类先要引入类类型
             --访问成员属性，方法
             local DerivedClass = CS.Tutorial.DerivedClass
+            --NINFO new class实例
             local testobj = DerivedClass()
             testobj.DMF = 1024--设置成员属性
             print(testobj.DMF)--读取成员属性
@@ -210,6 +213,7 @@ public class LuaCallCs : MonoBehaviour
             testobj.BMF = 4096--写基类成员属性
             testobj:BMFunc()--基类方法调用
 
+            --NINFO 这个方法看不懂可以看下CSCallLua中lua多参数的部分，lua竟然能返回多参数，并且直接赋值，神奇
             --复杂方法调用
             local ret, p2, p3, csfunc = testobj:ComplexFunc({x=3, y = 'john'}, 100, function()
                print('i am lua callback')
@@ -221,6 +225,7 @@ public class LuaCallCs : MonoBehaviour
             testobj:TestFunc(100)
             testobj:TestFunc('hello')
 
+            --NINFO DerivedClass有重写操作符，这个注意
             --操作符
             local testobj2 = DerivedClass()
             testobj2.DMF = 2048
@@ -238,10 +243,14 @@ public class LuaCallCs : MonoBehaviour
             print(testobj:GetSomeBaseData()) --访问基类的Extension methods
             testobj:GenericMethodOfString()  --通过Extension methods实现访问泛化方法
 
+            --NINFO 这里这个枚举CS.Tutorial.TestEnum.E1是全局的
             --枚举类型
             local e = testobj:EnumTestFunc(CS.Tutorial.TestEnum.E1)
             print(e, e == CS.Tutorial.TestEnum.E2)
-            print(CS.Tutorial.TestEnum.__CastFrom(1), CS.Tutorial.TestEnum.__CastFrom('E1'))
+            print('Nafio测试枚举转换--',CS.Tutorial.TestEnum.__CastFrom(1), CS.Tutorial.TestEnum.__CastFrom('E1'))
+            --结果为LUA: Nafio测试枚举转换--	E2: 1	E1: 0
+
+            --NINFO 这个枚举是类中的
             print(CS.Tutorial.DerivedClass.TestEnumInner.E3)
             assert(CS.Tutorial.BaseClass.TestEnumInner == nil)
 
