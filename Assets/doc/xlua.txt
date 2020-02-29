@@ -29,6 +29,12 @@ https://www.cnblogs.com/xiaohutu/p/12168781.html
 xlua继承的lua库
 https://github.com/chexiongsheng/build_xlua_with_libs
 
+lua性能注意事项，要了解下
+https://zhuanlan.zhihu.com/p/23559893
+https://www.cnblogs.com/lijiajia/p/11219964.html
+lua与c#传二进制
+https://blog.csdn.net/qq_34103074/article/details/89037186
+
 关于缓存c#调用lua函数的例子
 https://www.e-learn.cn/content/qita/788501
 
