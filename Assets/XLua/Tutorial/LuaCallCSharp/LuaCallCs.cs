@@ -138,6 +138,12 @@ namespace Tutorial
         {
             Debug.Log("GenericMethod<" + typeof(T) + ">");
         }
+
+        //NINFO 测试c#传bytes给lua
+        public int[] TBytes = new int[5] { 1, 2, 3, 4, 5 };
+        
+
+
     }
 
     //NINFO 这个类原来是在DerivedClass内的，放里面后脚本不能挂载，所以提了出来
@@ -254,6 +260,7 @@ public class LuaCallCs : MonoBehaviour
             print(CS.Tutorial.DerivedClass.TestEnumInner.E3)
             assert(CS.Tutorial.BaseClass.TestEnumInner == nil)
 
+            --NINFO 委托和事件就是写法比较特殊，非常容易理解
             --Delegate
             testobj.TestDelegate('hello') --直接调用
             local function lua_delegate(str)
@@ -282,13 +289,19 @@ public class LuaCallCs : MonoBehaviour
             --typeof
             newGameObj:AddComponent(typeof(CS.UnityEngine.ParticleSystem))
 
+            --NINFO GetCalc返回一个继承自接口ICalc的类
             --cast
             local calc = testobj:GetCalc()
             print('assess instance of InnerCalc via reflection', calc:add(1, 2))
             assert(calc.id == 100)
+            --这里cast作用是把类转换为接口ICalc?
             cast(calc, typeof(CS.Tutorial.ICalc))
             print('cast to interface ICalc', calc:add(1, 2))
             assert(calc.id == nil)
+
+            --NINFO 测试下c#传bytes到lua
+            --local tbs = testobj2.TBytes
+            --print('c#传bs到lua',tbs[1],tbs[2],tbs[3])
        end
 
        demo()
@@ -321,4 +334,18 @@ public class LuaCallCs : MonoBehaviour
 	{
 		luaenv.Dispose();
 	}
+
+    [LuaCallCSharp]
+    public LuaTable TestBytes2(byte[] bs)
+    {
+        //byte[] testbyte = System.Text.Encoding.Default.GetBytes("ab");
+        LuaTable luaTable = luaenv.NewTable();
+        for (int i = 0; i < bs.Length; i++)
+        {
+            //lua table 下标从1开始的
+            luaTable.Set(i + 1, bs[i]);
+        }
+        return luaTable;
+    }
+
 }

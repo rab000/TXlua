@@ -44,6 +44,11 @@ namespace Tutorial
             print('ret_e called')
             return e
         end
+        
+        --NINFO 模拟一个二进制数组
+        g={
+            1,2,3,4,5
+        }
     ";
 
         public class DClass
@@ -128,6 +133,12 @@ namespace Tutorial
             LuaFunction d_e = luaenv.Global.Get<LuaFunction>("e");
             d_e.Call();
 
+            //NINFO 测试映射到数组
+            List<byte> gg = luaenv.Global.Get<List<byte>>("g"); //映射到数组？            
+            Debug.Log("lua表映射到数组 count:"+gg.Count+" 第一个元素:"+gg[0]+" 第二个元素:"+gg[1]);
+
+            //这里注意如果直接转换成byte[]类型会提示gg为null，但是转换成int[]类型时可以的
+            //转换成List<byte>也可以
         }
 
         // Update is called once per frame
